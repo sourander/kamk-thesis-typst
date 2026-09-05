@@ -1,0 +1,23 @@
+[fi]
+university = "Kajaanin ammattikorkeakoulu"
+thesis = "Opinnäytetyö"
+supervisor_label = "Ohjaaja"
+abstract = "Tiivistelmä"
+author = "Tekijä(t)"
+title = "Työn nimi"
+degree = "Tutkintonimike"
+keywords = "Asiasanat"
+toc = "Sisällys"
+symbols = "Symboliluettelo"
+
+[en]
+university = "Kajaani University of Applied Sciences"
+thesis = "Thesis"
+supervisor_label = "Supervisor"
+abstract = "Abstract"
+author = "Author(s)"
+title = "Title"
+degree = "Degree Title"
+keywords = "Keywords"
+toc = "Table of Contents"
+symbols = "List of Symbols"
