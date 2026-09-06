@@ -90,11 +90,27 @@
   // From now on, the headings shall be size 11 without bold
   show heading: set text(size: 11pt, weight: "regular")
 
-  // 3. Sisällys / Table of Contents
-  outline(
-    title: lang-data.at(language).toc,
-    indent: auto, // Sisennä alaotsikot automaattisesti
-  )
+// 3. Sisällys / Table of Contents
+  {
+    // Intercept ToC entries to format the Appendices heading specifically
+    show outline.entry: it => {
+      if it.element.has("label") and it.element.label == <kamk-appendices> {
+        // Wrap in a block to bypass the global par(spacing: 3.0em)
+        block(
+          // This should follow the standard spacing within a paragraph, not between paragraphs
+          above: 1.5em, 
+          link(it.element.location())[#it.element.body]
+        )
+      } else {
+        it
+      }
+    }
+
+    outline(
+      title: lang-data.at(language).toc,
+      indent: auto,
+    )
+  }
 
   pagebreak(weak: true)
 

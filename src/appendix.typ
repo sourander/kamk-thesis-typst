@@ -9,8 +9,10 @@
 
   let d = lang-data.at(language)
 
-  // 1. Render the index of appendices
-  heading(level: 1, outlined: true, numbering: none, d.appendices_heading)
+  // 1. Render the index of appendices. Label is needed for ToC special treatment.
+  [
+    #heading(level: 1, outlined: true, numbering: none)[#d.appendices_heading] <kamk-appendices>
+  ]
 
   for (i, item) in items.enumerate() {
     block(below: 0.65em)[#d.appendix #(i + 1) #item.title]
