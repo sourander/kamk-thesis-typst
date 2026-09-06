@@ -1,7 +1,7 @@
 #import "titlepage.typ": titlepage
 #import "abstract.typ": render-abstract
 
-// Ladataan käännökset
+// Load the translations
 #let lang-data = toml("lang.toml")
 
 #let template(
@@ -47,7 +47,8 @@
     - Set page settings for the rest of the document
     - Set heading spacing for all headings
     - Set H1 headings to have a page break before them and a gap above them
-  */
+    - Set a one-line empty gap between body text paragraphs
+    */
   set page(
     paper: "a4",
     margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm)
@@ -58,6 +59,7 @@
     v(2.0cm)
     it
   }
+  set par(spacing: 3.0em)
   
   // Finnish abstract (Tiivistelmä)
   render-abstract(
@@ -110,6 +112,6 @@
   set page(numbering: "1", number-align: top + right)
   counter(page).update(1)
 
-  // Varsinainen opinnäytetyön teksti alkaa tästä
+  // Body text of the document starts here
   body
 }

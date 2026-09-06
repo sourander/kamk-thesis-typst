@@ -1,10 +1,14 @@
-#import "kamk.typ": template
+// Later, this can just be: #import "@preview/kamk-thesis:1.0.0": template
+#import "../src/lib.typ": template, render-ai-usage, render-bibliography, render-appendices
+
+// Single source of truth for the thesis language; reused by every render-* call below.
+#let language = "fi"
 
 #show: template.with(
   // Perustiedot
   authors: ("Meikäläinen Matti",),
   date: datetime.today(),
-  language: "fi",
+  language: language,
   // cover-image: image("my-custom-cover.jpg"), 
 
   // Suomenkieliset tiedot
@@ -40,4 +44,46 @@
 )
 
 = Johdanto
+
 Tämä on opinnäytetyön ensimmäinen luku. Sivun asetukset (marginaalit yms.) ovat nyt KAMK:n ohjeiden mukaiset tästä eteenpäin automaattisesti.
+
+#lorem(100)
+
+#lorem(50)
+
+= Mallipohjan käyttäminen
+
+#lorem(100)
+
+= Sivut
+
+#lorem(50)
+
+#lorem(100)
+
+#render-ai-usage(
+  language: language,
+  tools: [(Syötä tiedot tähän)],
+  usage: [(Kuvaa tähän, mihin tarkoitukseen ja miten tekoälyä on käytetty opinnäytetyössä ja opinnäytetyöprosessin eri vaiheissa.)],
+)
+
+#render-bibliography(language: language, source: path("references.bib"))
+
+// Arabic page numbers stop here; appendix pages carry their own "Liite N i/total" numbering.
+#set page(numbering: none)
+
+#let appendix-items = (
+  (
+    title: "Sparkin asennus Windows-koneille",
+    pages: (
+      [#lorem(80)],
+      [#lorem(60)],
+    ),
+  ),
+  (
+    title: "Toinen esimerkkiliite",
+    pages: ([#lorem(40)],),
+  ),
+)
+
+#render-appendices(language: language, items: appendix-items)
