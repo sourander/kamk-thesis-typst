@@ -17,6 +17,13 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 - Tip: the [typst-package-template](https://github.com/typst-community/typst-package-template) repo can be used as a reference for packaging layout (e.g. `typst.toml`, `CHANGELOG.md`, release workflow) when preparing `src/` for publication.
 - Rule of thumb: template/layout changes go in `src/`; thesis content and metadata go in `template/thesis.typ`.
 
+## Verification
+
+- The only automated check is that `just build` compiles without errors. Run it to verify changes.
+- Do NOT do any visual or rendered-output inspection. Specifically, do not render the PDF and view it, do not render PNG/PDF pages to images and analyze them, and do not attempt any visual diffing or screenshot-based checks. These pipelines are wasteful and out of scope for an agent.
+- Visual inspection of the output is a human responsibility. Leave it to the user.
+- Testing via the Tytanic library will be introduced later; until then, verification is manual (human inspection) plus successful compilation.
+
 ## Gotchas
 
 - `assets/` is fully gitignored (pending marketing approval), yet `src/titlepage.typ` references `assets/cover_image.png` and `assets/KAMK_english_white_copyrighted.svg`. A fresh clone will fail to compile until those files exist locally.
