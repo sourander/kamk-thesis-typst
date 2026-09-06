@@ -6,5 +6,5 @@
 #let render-bibliography(language: "fi", source: none, style: "ieee") = {
   let d = lang-data.at(language)
 
-  bibliography(source, title: d.references_heading, style: style)
+  bibliography(source, title: d.references_heading, style: "kamk-vancouver.csl")
 }

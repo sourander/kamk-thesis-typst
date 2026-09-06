@@ -25,7 +25,7 @@
   set document(title: title, author: authors)
 
   // Global document settings
-  set text(size: 11pt, lang: language)
+  set text(size: 11pt, lang: language, font: "Carlito")
   set par(justify: true, leading: 1.5em)
   
   // Render the title page with zero margins

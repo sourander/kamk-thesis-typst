@@ -7,3 +7,89 @@
       primaryClass={cs.CL},
       url={https://arxiv.org/abs/1706.03762}, 
 }
+
+// Book and e-Book are cited in the same way. Zotero knows them simply as "Book".
+// If it is online and has a permanent link (URI), add it too.
+@book{vilkkaTutkiJaKehita2021,
+  title = {Tutki Ja Kehitä},
+  author = {Vilkka, Hanna},
+  date = {2021},
+  publisher = {PS-kustannus},
+  location = {Jyväskylä},
+  url = {https://urn.fi/URN:ISBN:978-952-370-173-1},
+  abstract = {Tutki ja kehitä on perusteos ...},
+  isbn = {978-952-370-173-1}
+}
+
+
+// A book that has been published in series, such as a textbook series, is cited in the same way as a book
+// Difference is the addition of the series field and the number field.
+@book{lerkkanenOpettajienTyohyvinvointiJa2020,
+  title = {Opettajien Työhyvinvointi Ja Sen Yhteys Pedagogisen Työn Laatuun},
+  author = {Lerkkanen, Marja-Kristiina and Pakarinen, Eija and Messala, Maiju and Penttinen, Viola and Aulén, Anna-Mari and Jõgi, Anna-Liisa},
+  date = {2020},
+  series = {Jyväskylän Yliopiston Psykologian Laitoksen Julkaisuja},
+  number = {358},
+  publisher = {Jyväskylän yliopisto},
+  url = {http://urn.fi/URN:ISBN:978-951-39-8324-6},
+  abstract = {The aim of the study ...},
+  isbn = {978-951-39-8324-6, 0782-3274}
+}
+
+
+// Audio book from Celia is added using a special Note. In Zotero, there is a field where you can add
+// notes. Simply add one with content `[Celia äänikirjapalvelu 2007]` and it will be added to the citation.
+@book{hirsjarviTutki2007,
+  title = {Tutki ja kirjoita},
+  author = {Hirsjärvi, Sirkka},
+  date = {2007},
+  publisher = {Tammi},
+  howpublished = {audio},
+  note = {[Celia äänikirjapalvelu 2007]}
+}
+
+// Articles (a Journal Article in Zotero) have the following fields:
+@article{vilkkaTarinoillaTasaarvoon2019,
+  title = {Tarinoilla Tasa-Arvoon? {{Narratiivisten}} Menetelmien Mahdollisuuksia Kriittisessä Toimintatutkimuksessa},
+  author = {Vilkka, Hanna and Ylöstalo, Hanna},
+  date = {2019-12-18},
+  journaltitle = {Aikuiskasvatus},
+  shortjournal = {AK},
+  volume = {36},
+  number = {2},
+  pages = {99--108},
+  issn = {2490-0427, 0358-6197},
+  doi = {10.33336/aik.88483},
+  url = {https://doi.org/10.33336/aik.88483},
+  abstract = {Artikkelimme on teoreettis....}
+}
+
+// Article in collection (a Book Section in Zotero) has the following fields:
+@incollection{fordCellCycleRegulatory2004,
+  title = {Cell {{Cycle Regulatory Cascades}}},
+  booktitle = {Cell {{Cycle}} and {{Growth Control}}},
+  author = {Ford, Heide L. and Sclafani, Robert A. and Degregori, James},
+  editor = {Stein, Gary S. and Pardee, Arthur B.},
+  date = {2004-05-10},
+  edition = {1},
+  pages = {93--128},
+  publisher = {Wiley-Liss},
+  location = {Hoboken},
+  doi = {10.1002/0471656437.ch3},
+  url = {https://onlinelibrary.wiley.com/doi/10.1002/0471656437.ch3},
+  isbn = {978-0-471-25071-5 978-0-471-65643-2},
+  langid = {english}
+}
+
+// A physical or  online newspaper article (a Newspaper Article in Zotero) should end up looking like this:
+@article{paukkuTekoalyVoiMuokata2022,
+  entrysubtype = {newspaper},
+  title = {Tekoäly voi muokata verkkokuvaasi niin, että näytät yhä kivemmalta ja fiksummalta},
+  author = {Paukku, Timo},
+  date = {2022-05-10},
+  journaltitle = {Helsingin Sanomat},
+  url = {https://www.hs.fi/tiede/art-2000008772623.html},
+  urldate = {2026-09-06},
+  abstract = {Algoritmi tekee kuvastasi vetävän, mutta tuo eettisiä ongelmia.},
+  langid = {finnish}
+}

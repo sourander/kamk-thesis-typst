@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="fi-FI">
+  <info>
+    <title>KAMK Vancouver</title>
+    <id>http://kamk.fi/vancouver-custom</id>
+    <updated>2023-10-15T00:00:00+00:00</updated>
+  </info>
+
+<!-- Formats inline citations as [1] or [1, s. 10-14] -->
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter="; ">
+      <group delimiter=", ">
+        <text variable="citation-number"/>
+        <text variable="locator"/>
+      </group>
+    </layout>
+  </citation>
+
+  <!-- Author macro: "Vilkka H" (no periods, space between last and initials) -->
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", "/>
+    </names>
+  </macro>
+
+  <!-- Editor macro: "Stein GS, Pardee AB, toim." -->
+  <macro name="editor">
+    <names variable="editor">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", "/>
+      <label form="short" prefix=", "/>
+    </names>
+  </macro>
+
+  <!-- Publisher macro: "Jyväskylä: PS-Kustannus" -->
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+    </group>
+  </macro>
+
+  <bibliography second-field-align="flush">
+    <layout>
+      <text variable="citation-number" suffix=". "/>
+      
+      <text macro="author" suffix=". "/>
+
+<choose>
+        <if type="book">
+          <!-- Edition first -->
+          <group delimiter=". " suffix=". ">
+            <text variable="edition"/>
+            
+            <!-- Title (italic) and Medium -->
+            <group delimiter=" ">
+              <text variable="title" font-style="italic"/>
+              <choose>
+                <if variable="medium">
+                  <text variable="medium" prefix="[" suffix="]"/>
+                </if>
+              </choose>
+            </group>
+
+            <!-- Series info -->
+            <group delimiter=" ">
+              <text variable="collection-title"/>
+              <text variable="collection-number"/>
+            </group>
+          </group>
+          
+          <!-- Location: Publisher; Year -->
+          <group delimiter="; ">
+            <text macro="publisher"/>
+            <date variable="issued">
+              <date-part name="year"/>
+            </date>
+          </group>
+        </if>
+        
+        <!-- Journal Article -->
+        <else-if type="article-journal">
+          <!-- Title -->
+          <text variable="title" font-style="italic" suffix=". "/>
+          
+          <!-- Journal formatting: Journal Year;Volume(Issue), Pages -->
+          <group delimiter=" ">
+            <!-- Journal Title -->
+            <text variable="container-title"/>
+            
+            <group>
+              <!-- Year; -->
+              <date variable="issued" suffix=";">
+                <date-part name="year"/>
+              </date>
+              <!-- Volume(Issue), Pages -->
+              <text variable="volume"/>
+              <text variable="issue" prefix="(" suffix=")"/>
+              <text variable="page" prefix=", "/>
+            </group>
+          </group>
+        </else-if>
+
+        <!-- Book Section alias inCollection -->
+        <else-if type="chapter">
+          <!-- Article Title -->
+          <text variable="title" font-style="italic" suffix=". "/>
+          
+          <!-- "Teoksessa: Editors." -->
+          <text value="Teoksessa: "/>
+          <text macro="editor" suffix=". "/>
+          
+          <!-- Book Title -->
+          <text variable="container-title" suffix=". "/>
+          
+          <!-- Location: Publisher; Year. Pages. -->
+          <group delimiter=". ">
+            <group delimiter="; ">
+              <text macro="publisher"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+            <text variable="page"/>
+          </group>
+        </else-if>
+
+        <!-- Newspaper Article, detected by being an article but having entrysubtype = {newspaper} -->
+
+      </choose>
+
+      <!-- Print the Note (e.g., [Celia...]) if it exists -->
+      <choose>
+        <if variable="note">
+          <text value=". "/>
+          <text variable="note"/>
+        </if>
+      </choose>
+
+      <!-- Smart punctuation & URL handling -->
+      <choose>
+        <if variable="URL">
+          <text value=". Saatavilla: "/>
+          <text variable="URL"/>
+        </if>
+        <else>
+          <!-- Cap the reference with a period -->
+          <text value="."/>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
