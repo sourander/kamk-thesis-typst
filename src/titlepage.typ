@@ -29,7 +29,7 @@
       
       #place(top + left, dx: 2.3cm, dy: 9cm, block(width: 11.1cm)[
         #text(fill: kamk-accent, size: 11pt)[#format-authors(authors, language: language)]
-        #v(1.5em)
+        #v(0em)
         #text(fill: kamk-accent, size: 18pt, weight: "bold")[#title]
       ])
       

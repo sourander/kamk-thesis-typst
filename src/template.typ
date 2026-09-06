@@ -31,7 +31,7 @@
   // Render the title page with zero margins
   page(margin: 0cm)[
     #titlepage(
-      title: title,
+      title: if language == "en" { title-en } else { title },
       authors: authors,
       degree-title: degree-title,
       degree-programme: degree-programme,
