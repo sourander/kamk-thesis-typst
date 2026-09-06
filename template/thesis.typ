@@ -1,10 +1,10 @@
 // Later, this can just be: #import "@preview/kamk-thesis:1.0.0": template
-#import "../src/lib.typ": template, render-ai-usage, render-bibliography, render-appendices
+#import "../src/lib.typ" as template
 
 // Single source of truth for the thesis language; reused by every render-* call below.
 #let language = "fi"
 
-#show: template.with(
+#show: template.cover-to-symbols.with(
   // Perustiedot
   authors: ("Meikäläinen Matti",),
   date: datetime.today(),
@@ -50,13 +50,13 @@
 #include "chapters/mallipohjankayttaminen.typ"
 #include "chapters/sivut.typ"
 
-#render-ai-usage(
+#template.render-ai-usage(
   language: language,
   tools: [(Syötä tiedot tähän)],
   usage: [(Kuvaa tähän, mihin tarkoitukseen ja miten tekoälyä on käytetty opinnäytetyössä ja opinnäytetyöprosessin eri vaiheissa.)],
 )
 
-#render-bibliography(language: language, source: path("references.bib"))
+#template.render-bibliography(language: language, source: path("references.bib"))
 
 // Arabic page numbers stop here; appendix pages carry their own "Liite N i/total" numbering.
 #set page(numbering: none)
@@ -72,4 +72,4 @@
   ),
 )
 
-#render-appendices(language: language, items: appendix-items)
+#template.render-appendices(language: language, items: appendix-items)

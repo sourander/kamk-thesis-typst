@@ -4,7 +4,7 @@
 // Load the translations
 #let lang-data = toml("lang.toml")
 
-#let template(
+#let cover-to-symbols(
   title: "",
   title-en: "",
   authors: (),
