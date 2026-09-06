@@ -64,14 +64,11 @@
 #let appendix-items = (
   (
     title: "Sparkin asennus Windows-koneille",
-    pages: (
-      [#lorem(80)],
-      [#lorem(60)],
-    ),
+    content: [#lorem(140)], // Can be of any length now
   ),
   (
     title: "Toinen esimerkkiliite",
-    pages: ([#lorem(40)],),
+    content: include "appendices/toinen_liite.typ", // Cleaner to split large appendices
   ),
 )
 
