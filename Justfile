@@ -20,3 +20,7 @@ watch:
 # Remove the build directory
 clean:
     rm -rf {{OUT_DIR}}
+
+# As of now, this works only on macOS that has Skim installed.
+skim:
+    open -a Skim build/thesis.pdf

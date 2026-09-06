@@ -43,23 +43,12 @@
   ),
 )
 
-= Johdanto
-
-Tämä on opinnäytetyön ensimmäinen luku. Sivun asetukset (marginaalit yms.) ovat nyt KAMK:n ohjeiden mukaiset tästä eteenpäin automaattisesti.
-
-#lorem(100)
-
-#lorem(50)
-
-= Mallipohjan käyttäminen
-
-#lorem(100)
-
-= Sivut
-
-#lorem(50)
-
-#lorem(100)
+/*
+  Tästä alkaa opinnäytetyön varsinainen sisältö. Jokainen kappale on oma tiedostonsa, joka tuodaan tähän päädokumenttiin. Tiedostot sijaitsevat kansiossa `src/chapters/`. Kappaleiden järjestystä voi muuttaa muuttamalla tuontijärjestystä. Nämä tiedostot ja niiden sisällön kirjoittaminen on sinun tehtäväsi opinnäytetyön kirjoittajana.
+*/
+#include "chapters/johdanto.typ"
+#include "chapters/mallipohjankayttaminen.typ"
+#include "chapters/sivut.typ"
 
 #render-ai-usage(
   language: language,
