@@ -81,15 +81,24 @@
   langid = {english}
 }
 
-// A physical or  online newspaper article (a Newspaper Article in Zotero) should end up looking like this:
-@article{paukkuTekoalyVoiMuokata2022,
-  entrysubtype = {newspaper},
+// An online newspaper article is just a special case of a Web Page in Zotero, where the Publisher is present.
+@online{paukkuTekoalyVoiMuokata2022,
   title = {Tekoäly voi muokata verkkokuvaasi niin, että näytät yhä kivemmalta ja fiksummalta},
   author = {Paukku, Timo},
   date = {2022-05-10},
-  journaltitle = {Helsingin Sanomat},
+  publisher = {Helsingin Sanomat},
   url = {https://www.hs.fi/tiede/art-2000008772623.html},
   urldate = {2026-09-06},
   abstract = {Algoritmi tekee kuvastasi vetävän, mutta tuo eettisiä ongelmia.},
-  langid = {finnish}
+  langid = {finnish},
+}
+
+// A web page with no person as an author, but a company, is cited also as a Web Page, also using
+a Publisher, but dropping Author, like this...
+@online{kuntaliittoAlueiden,
+  title = {Alueiden Kehittäminen},
+  date = {2022},
+  publisher = {Kuntaliitto},
+  url = {https://www.kuntaliitto.fi/talous-ja-elinvoima/elinvoima/alueiden-kehittaminen},
+  urldate = {2024-06-07}
 }

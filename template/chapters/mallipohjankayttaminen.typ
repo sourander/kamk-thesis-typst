@@ -12,4 +12,6 @@ Artikkeli voidaan merkitä näin @vilkkaTarinoillaTasaarvoon2019.
 
 Artikkeli, joka on julkaista kokoelmassa, on Zoterossa "Book section" ja täällä `incollection` @fordCellCycleRegulatory2004.
 
-Sanomalehden e-artikkeli käyttäytyy näin @paukkuTekoalyVoiMuokata2022.
+Sanomalehden e-artikkeli käyttäytyy näin @paukkuTekoalyVoiMuokata2022. Se on vain tavallisen Zoteron Web Pagen erikoistapaus, jossa on Publisher olemassa.
+
+Tavallinen verkkosivu, jonka kirjoittajana on yritys tai vastaava taho, merkitään näin @kuntaliittoAlueiden.

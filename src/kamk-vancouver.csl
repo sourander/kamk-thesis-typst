@@ -48,7 +48,7 @@
       
       <text macro="author" suffix=". "/>
 
-<choose>
+    <choose>
         <if type="book">
           <!-- Edition first -->
           <group delimiter=". " suffix=". ">
@@ -127,7 +127,39 @@
           </group>
         </else-if>
 
-        <!-- Newspaper Article, detected by being an article but having entrysubtype = {newspaper} -->
+        <!-- Online / Webpage / E-Newspaper sources -->
+        <else-if type="webpage post-weblog" match="any">
+          <!-- Title -->
+          <text variable="title" suffix=". "/>
+          
+          <!-- Publisher / Site Name -->
+          <choose>
+            <if variable="publisher">
+              <text variable="publisher" suffix=". "/>
+            </if>
+          </choose>
+          
+          <!-- [Internet]. Published Date (handles both full date and year-only) -->
+          <text value="[Internet]. "/>
+          <date variable="issued" suffix=" ">
+            <date-part name="day" form="numeric-leading-zeros" suffix="." range-delimiter="-"/>
+            <date-part name="month" form="numeric-leading-zeros" suffix="."/>
+            <date-part name="year"/>
+          </date>
+          
+          <!-- Accessed Date -->
+          <choose>
+            <if variable="accessed">
+              <group prefix="[viitattu " suffix="]">
+                <date variable="accessed">
+                  <date-part name="day" form="numeric-leading-zeros" suffix="."/>
+                  <date-part name="month" form="numeric-leading-zeros" suffix="."/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </if>
+          </choose>
+        </else-if>
 
       </choose>
 
