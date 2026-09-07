@@ -39,7 +39,7 @@
         if cover-image != none {
           cover-image
         } else {
-          image("../../assets/cover_image.png", alt: "Kajaani University of Applied Sciences logo")
+          image("../../assets/cover_image.jpg", alt: "Kajaani University of Applied Sciences logo")
         }
       })
     ]),
