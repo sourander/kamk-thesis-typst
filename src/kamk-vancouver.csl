@@ -7,6 +7,13 @@
     <link href="https://libguides.kamk.fi/vancouver" rel="documentation"/>
   </info>
 
+  <!-- Custom local overrides for the Finnish dictionary -->
+  <locale xml:lang="fi">
+    <terms>
+      <term name="available at">saatavilla</term>
+    </terms>
+  </locale>
+
   <!-- Formats inline citations as [1] or [1, Luku 4] -->
   <citation collapse="citation-number">
     <sort>
