@@ -46,6 +46,32 @@ $ cd kamk-thesis-typst
 $ just build   # compiles template/thesis.typ → build/thesis.pdf
 ```
 
+## Font installation
+
+The template uses the **Carlito** font for body text. It ships with Windows as a fallback for the proprietary Calibri, but Linux and macOS users need to install it to match KAMK's look.
+
+### On Ubuntu
+
+Follow these steps to install Carlito on Ubuntu:
+
+1. Open your Terminal (`Ctrl` + `Alt` + `T`).
+2. Update your package list and install the font by running:
+   ```bash
+   sudo apt update && sudo apt install fonts-crosextra-carlito
+    ```
+3. Update the font cache by running:
+   ```bash
+   fc-cache -f -v
+   ```
+
+### On macOS
+
+Follow these steps to install Carlito on macOS:
+
+```bash
+brew install --cask font-carlito
+``` 
+
 ## Usage
 
 `template` renders the full front matter (title page, Tiivistelmä, Abstract, Sisällys, optional symbol list) followed by your body content, with A4 paper, KAMK margins, and heading/page-numbering rules applied automatically. All content parameters come in `fi`/`en` pairs; the `language` parameter selects which labels are used for the title page, table of contents, and symbol list.
