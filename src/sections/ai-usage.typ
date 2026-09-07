@@ -1,5 +1,5 @@
 // Load the translations
-#let lang-data = toml("lang.toml")
+#let lang-data = toml("../data/lang.toml")
 
 // Template-generated AI-usage disclosure; only `tools` and `usage` are author-supplied.
 #let render-ai-usage(language: "fi", tools: none, usage: none) = {

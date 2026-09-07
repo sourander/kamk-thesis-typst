@@ -2,7 +2,7 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="fi-FI">
   <info>
     <title>KAMK Vancouver</title>
-    <id>https://github.com/sourander/kamk-thesis-typst/raw/refs/heads/main/src/kamk-vancouver.csl</id>
+    <id>https://github.com/sourander/kamk-thesis-typst/raw/refs/heads/main/src/data/kamk-vancouver.csl</id>
     <updated>2026-09-07T00:00:00+00:00</updated>
     <link href="https://libguides.kamk.fi/vancouver" rel="documentation"/>
   </info>

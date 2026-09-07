@@ -4,7 +4,7 @@
 // Single source of truth for the thesis language; reused by every render-* call below.
 #let language = "fi"
 
-#show: template.cover-to-symbols.with(
+#show: template.frontmatter.with(
   // Perustiedot
   authors: ("Meikäläinen Matti",),
   date: datetime.today(),

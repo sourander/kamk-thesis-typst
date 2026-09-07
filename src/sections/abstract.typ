@@ -1,4 +1,4 @@
-#import "utils.typ": format-authors
+#import "../core/utils.typ": format-authors
 
 #let render-abstract(
   lang-dict,

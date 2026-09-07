@@ -1,5 +1,5 @@
 // Load the translations
-#let lang-data = toml("lang.toml")
+#let lang-data = toml("../data/lang.toml")
 
 #let render-appendices(language: "fi", items: ()) = {
   // If there are no appendices, skip rendering the section entirely

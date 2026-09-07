@@ -1,5 +1,5 @@
-#import "colors.typ": kamk-old-bar, kamk-accent
-#import "utils.typ": format-authors
+#import "../core/colors.typ": kamk-old-bar, kamk-accent
+#import "../core/utils.typ": format-authors
 
 #let titlepage(
   title: "",
@@ -39,7 +39,7 @@
         if cover-image != none {
           cover-image
         } else {
-          image("../assets/cover_image.png")
+          image("../../assets/cover_image.png")
         }
       })
     ]),
@@ -54,7 +54,7 @@
           #semester
         ]))
         
-        #place(bottom + left, dx: 0.5cm, dy: -1.5cm, image("../assets/KAMK_english_white_copyrighted.svg", width: 85%))
+        #place(bottom + left, dx: 0.5cm, dy: -1.5cm, image("../../assets/KAMK_english_white_copyrighted.svg", width: 85%))
       ]
     )
   )
