@@ -36,10 +36,12 @@
       // Render the custom image, or fallback to the default package asset
       #place(bottom + left, dx: 0cm, dy: 0cm, {
         set image(width: 100%)
-        if cover-image != none {
+        if cover-image == false {
+          // No image at all; leave the left column blank
+        } else if cover-image != none {
           cover-image
         } else {
-          image("../../assets/cover_image.jpg", alt: "Kajaani University of Applied Sciences logo")
+          image("../../assets/cover_image.svg", alt: "Kajaani University of Applied Sciences logo")
         }
       })
     ]),

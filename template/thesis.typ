@@ -9,7 +9,8 @@
   authors: ("Meikäläinen Matti",),
   date: datetime.today(),
   language: language,
-  // cover-image: image("my-custom-cover.jpg"), 
+  // cover-image: image("my-custom-cover.jpg", alt: "My custom cover image"), // Optional; defaults to package asset
+  // cover-image: false,                                                      // Optional; explicitly disable the cover image entirely
 
   // Suomenkieliset tiedot
   title: "Typst-pohjan kehittäminen Kajaanin ammattikorkeakoululle",

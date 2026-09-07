@@ -4,9 +4,10 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 
 ## Commands
 
-- `just build` (default) — compiles `template/thesis.typ` → `build/thesis.pdf` (PDF/A-1a)
+- `just build` (default) — compiles `template/thesis.typ` → `build/thesis.pdf`
 - `just watch` — live recompile on change
 - `just clean` — removes `build/`
+- `just thumbnail` — generates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI)
 - `just skim` — opens `build/thesis.pdf` in Skim (macOS only)
 - Requires `just` and `typst` CLIs.
 
