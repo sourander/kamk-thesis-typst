@@ -2,11 +2,12 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="fi-FI">
   <info>
     <title>KAMK Vancouver</title>
-    <id>http://kamk.fi/vancouver-custom</id>
-    <updated>2023-10-15T00:00:00+00:00</updated>
+    <id>https://github.com/sourander/kamk-thesis-typst/raw/refs/heads/main/src/kamk-vancouver.csl</id>
+    <updated>2026-09-07T00:00:00+00:00</updated>
+    <link href="https://libguides.kamk.fi/vancouver" rel="documentation"/>
   </info>
 
-<!-- Formats inline citations as [1] or [1, s. 10-14] -->
+  <!-- Formats inline citations as [1] or [1, Luku 4] -->
   <citation collapse="citation-number">
     <sort>
       <key variable="citation-number"/>
@@ -14,12 +15,13 @@
     <layout prefix="[" suffix="]" delimiter="; ">
       <group delimiter=", ">
         <text variable="citation-number"/>
+        <!-- Locator intentionally left bare for flexible input -->
         <text variable="locator"/>
       </group>
     </layout>
   </citation>
 
-  <!-- Author macro: "Vilkka H" (no periods, space between last and initials) -->
+  <!-- Author macro: "Vilkka H" -->
   <macro name="author">
     <names variable="author">
       <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", "/>
@@ -46,77 +48,54 @@
     <layout>
       <text variable="citation-number" suffix=". "/>
       
-      <text macro="author" suffix=". "/>
+      <!-- Smart Grouping: Automatically handles trailing periods and prevents double dots -->
+      <group delimiter=". " suffix=".">
+        <text macro="author"/>
 
-    <choose>
-        <if type="book">
-          <!-- Edition first -->
-          <group delimiter=". " suffix=". ">
+        <choose>
+          <!-- Book -->
+          <if type="book">
             <text variable="edition"/>
-            
-            <!-- Title (italic) and Medium -->
             <group delimiter=" ">
               <text variable="title" font-style="italic"/>
-              <choose>
-                <if variable="medium">
-                  <text variable="medium" prefix="[" suffix="]"/>
-                </if>
-              </choose>
+              <text variable="medium" prefix="[" suffix="]"/>
             </group>
-
-            <!-- Series info -->
             <group delimiter=" ">
               <text variable="collection-title"/>
               <text variable="collection-number"/>
             </group>
-          </group>
-          
-          <!-- Location: Publisher; Year -->
-          <group delimiter="; ">
-            <text macro="publisher"/>
-            <date variable="issued">
-              <date-part name="year"/>
-            </date>
-          </group>
-        </if>
-        
-        <!-- Journal Article -->
-        <else-if type="article-journal">
-          <!-- Title -->
-          <text variable="title" font-style="italic" suffix=". "/>
-          
-          <!-- Journal formatting: Journal Year;Volume(Issue), Pages -->
-          <group delimiter=" ">
-            <!-- Journal Title -->
-            <text variable="container-title"/>
-            
-            <group>
-              <!-- Year; -->
-              <date variable="issued" suffix=";">
+            <group delimiter="; ">
+              <text macro="publisher"/>
+              <date variable="issued">
                 <date-part name="year"/>
               </date>
-              <!-- Volume(Issue), Pages -->
-              <text variable="volume"/>
-              <text variable="issue" prefix="(" suffix=")"/>
-              <text variable="page" prefix=", "/>
             </group>
-          </group>
-        </else-if>
+          </if>
+          
+          <!-- Journal Article -->
+          <else-if type="article-journal">
+            <text variable="title" font-style="italic"/>
+            <group delimiter=" ">
+              <text variable="container-title"/>
+              <group>
+                <date variable="issued" suffix=";">
+                  <date-part name="year"/>
+                </date>
+                <text variable="volume"/>
+                <text variable="issue" prefix="(" suffix=")"/>
+                <text variable="page" prefix=", "/>
+              </group>
+            </group>
+          </else-if>
 
-        <!-- Book Section alias inCollection -->
-        <else-if type="chapter">
-          <!-- Article Title -->
-          <text variable="title" font-style="italic" suffix=". "/>
-          
-          <!-- "Teoksessa: Editors." -->
-          <text value="Teoksessa: "/>
-          <text macro="editor" suffix=". "/>
-          
-          <!-- Book Title -->
-          <text variable="container-title" suffix=". "/>
-          
-          <!-- Location: Publisher; Year. Pages. -->
-          <group delimiter=". ">
+          <!-- Book Section (Chapter) -->
+          <else-if type="chapter">
+            <text variable="title" font-style="italic"/>
+            <group delimiter=" ">
+              <text term="in" text-case="capitalize-first" suffix=":"/>
+              <text macro="editor"/>
+            </group>
+            <text variable="container-title"/>
             <group delimiter="; ">
               <text macro="publisher"/>
               <date variable="issued">
@@ -124,64 +103,42 @@
               </date>
             </group>
             <text variable="page"/>
-          </group>
-        </else-if>
+          </else-if>
 
-        <!-- Online / Webpage / E-Newspaper sources -->
-        <else-if type="webpage post-weblog" match="any">
-          <!-- Title -->
-          <text variable="title" suffix=". "/>
-          
-          <!-- Publisher / Site Name -->
-          <choose>
-            <if variable="publisher">
-              <text variable="publisher" suffix=". "/>
-            </if>
-          </choose>
-          
-          <!-- [Internet]. Published Date (handles both full date and year-only) -->
-          <text value="[Internet]. "/>
-          <date variable="issued" suffix=" ">
-            <date-part name="day" form="numeric-leading-zeros" suffix="." range-delimiter="-"/>
-            <date-part name="month" form="numeric-leading-zeros" suffix="."/>
-            <date-part name="year"/>
-          </date>
-          
-          <!-- Accessed Date -->
-          <choose>
-            <if variable="accessed">
-              <group prefix="[viitattu " suffix="]">
+          <!-- Online / Webpage / E-Newspaper sources -->
+          <else-if type="webpage post-weblog" match="any">
+            <text variable="title"/>
+            <!-- No choose block needed; if it doesn't exist, it won't render -->
+            <text variable="publisher"/>
+            <group delimiter=" ">
+              <text value="[Internet]"/>
+              <date variable="issued">
+                <date-part name="day" form="numeric-leading-zeros" suffix="." range-delimiter="-"/>
+                <date-part name="month" form="numeric-leading-zeros" suffix="."/>
+                <date-part name="year"/>
+              </date>
+              <!-- Automatically wraps in brackets and uses localized "viitattu" -->
+              <group prefix="[" suffix="]">
+                <text term="accessed" suffix=" "/>
                 <date variable="accessed">
                   <date-part name="day" form="numeric-leading-zeros" suffix="."/>
                   <date-part name="month" form="numeric-leading-zeros" suffix="."/>
                   <date-part name="year"/>
                 </date>
               </group>
-            </if>
-          </choose>
-        </else-if>
+            </group>
+          </else-if>
+        </choose>
 
-      </choose>
-
-      <!-- Print the Note (e.g., [Celia...]) if it exists -->
-      <choose>
-        <if variable="note">
-          <text value=". "/>
-          <text variable="note"/>
-        </if>
-      </choose>
-
-      <!-- Smart punctuation & URL handling -->
-      <choose>
-        <if variable="URL">
-          <text value=". Saatavilla: "/>
+        <!-- Notes and URLs (Handled automatically by the parent delimiter=". ") -->
+        <text variable="note"/>
+        
+        <group delimiter=" ">
+          <!-- Automatically uses localized "Saatavilla" -->
+          <text term="available at" text-case="capitalize-first" suffix=":"/>
           <text variable="URL"/>
-        </if>
-        <else>
-          <!-- Cap the reference with a period -->
-          <text value="."/>
-        </else>
-      </choose>
+        </group>
+      </group>
     </layout>
   </bibliography>
 </style>
