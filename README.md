@@ -1,5 +1,5 @@
 # The `kamk-thesis` Package
-<div align="center">Version 1.0.0</div>
+<div align="center">Version 0.1.0</div>
 
 A Typst template for theses at Kajaani University of Applied Sciences (KAMK): title page, Finnish and English abstracts, table of contents, optional list of symbols, and body chapters with KAMK's official page geometry and automatic page numbering.
 
@@ -8,32 +8,24 @@ A Typst template for theses at Kajaani University of Applied Sciences (KAMK): ti
 These instructions will get you a copy of the project up and running locally. [`template/thesis.typ`](template/thesis.typ) is a ready-made entry document you can copy and fill in with your thesis content.
 
 ```typ
-// Until the package is published, import by relative path:
-#import "../src/lib.typ": template
-// Later, this can just be: #import "@preview/kamk-thesis:1.0.0": template
+#import "@preview/kamk-thesis:0.1.0" as template
 
-#show: template.with(
+#show: template.frontmatter.with(
+  // Perustiedot
   authors: ("Meikäläinen Matti",),
   date: datetime.today(),
-  language: "fi",
-
-  // Finnish metadata
-  title: "Typst-pohjan kehittäminen Kajaanin ammattikorkeakoululle",
-  degree-title: "Tradenomi (AMK)",
-  degree-programme: "Tietojenkäsittely",
-  keywords-fi: ("Typst", "mallipohja"),
-  abstract-fi: [Suomenkielinen tiivistelmä tähän.],
-
-  // English metadata
-  title-en: "Developing a Typst Template for Kajaani University of Applied Sciences",
-  degree-title-en: "Bachelor of Business Administration",
-  degree-programme-en: "Business Information Technology",
-  keywords-en: ("Typst", "template"),
-  abstract-en: [English abstract here.],
+  // Other parameters removed for brevity; see the thesis.typ for full example
+  // ...
 )
 
-= Johdanto
-The thesis body starts here; page numbering and heading styles are applied automatically.
+// ...
+
+// Body chapters are included from separate files, e.g.:
+#include "chapters/johdanto.typ"
+#include "chapters/mallipohjankayttaminen.typ"
+#include "chapters/sivut.typ"
+
+// ...
 ```
 
 ### Installation

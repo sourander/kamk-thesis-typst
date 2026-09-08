@@ -9,6 +9,7 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 - `just clean` — removes `build/`
 - `just thumbnail` — generates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI)
 - `just skim` — opens `build/thesis.pdf` in Skim (macOS only)
+- `just bump <X.Y.Z>` — updates the version in `typst.toml`, `template/thesis.typ` and `README.md`; run `just install-preview` afterwards
 - `just package <target>` — packages the library (files per `.typstignore`) into `<target>/<name>/<version>` via `scripts/package`
 - `just install` / `just install-preview` — package into the `@local` / `@preview` Typst package dirs of the user's data dir
 - `just uninstall` / `just uninstall-preview` — remove the installed `<name>/<version>` from the `@local` / `@preview` dirs via `scripts/uninstall`

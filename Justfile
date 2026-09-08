@@ -58,6 +58,26 @@ test-scripts:
 update *args:
     tt update {{args}}
 
+# Bump the package version in typst.toml, template/thesis.typ and README.md.
+bump version:
+    # Require the supplied version to match X.Y.Z exactly, using numeric components.
+    @perl -e '$v = "{{version}}"; die "bump: version must be X.Y.Z, got \"{{version}}\"\n" unless $v =~ /\A[0-9]+\.[0-9]+\.[0-9]+\z/;'
+
+    # Look for a complete TOML line such as: version = "0.1.0"
+    @perl -pi -e 's/^version = "[0-9]+\.[0-9]+\.[0-9]+"$/version = "{{version}}"/' typst.toml
+
+    # Look for a Typst package reference such as: kamk-thesis:0.1.0
+    @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' template/thesis.typ
+
+    # Look for an HTML-escaped version label such as: &gt;Version 0.1.0
+    @perl -pi -e 's/(&gt;Version )[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' README.md
+
+    # Look for a Typst package reference such as: kamk-thesis:0.1.0
+    @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' README.md
+
+    # Display the resulting changes.
+    @git diff -- typst.toml template/thesis.typ README.md
+
 # Print the resolved packaging configuration, optionally resolving a target
 [script]
 setup *args:
