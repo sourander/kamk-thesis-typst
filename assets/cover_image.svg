@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 453.54 453.54">
+  <!-- Generator: Adobe Illustrator 29.8.10, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke: #a3a3a3;
+        stroke-width: 1.13px;
+      }
+
+      .st0, .st1 {
+        stroke-miterlimit: 1.13;
+      }
+
+      .st0, .st2 {
+        fill: #faffff;
+      }
+
+      .st3 {
+        font-family: Arial-BoldMT, Arial;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .st3, .st4 {
+        fill: #a3a3a3;
+        isolation: isolate;
+      }
+
+      .st1 {
+        fill: none;
+        stroke: #d3cfc6;
+        stroke-width: 2px;
+      }
+
+      .st4 {
+        font-family: ArialMT, Arial;
+        font-size: 13.61px;
+      }
+    </style>
+  </defs>
+  <rect class="st2" x="0" y="0" width="453.54" height="453.54"/>
+  <line class="st1" x1="0" y1="0" x2="453.54" y2="453.54"/>
+  <line class="st1" x1="453.54" y1="0" x2="0" y2="453.54"/>
+  <rect class="st0" x="85.04" y="164.41" width="283.46" height="119.06" rx="5.67" ry="5.67"/>
+  <text class="st3" transform="translate(187.26 208.66)"><tspan x="0" y="0">1:1 to 3:2</tspan></text>
+  <text class="st4" transform="translate(121.28 238.11)"><tspan x="0" y="0">Replace this with your cover image</tspan></text>
+  <text class="st4" transform="translate(173.07 257.95)"><tspan x="0" y="0">or drop altogether</tspan></text>
+</svg>

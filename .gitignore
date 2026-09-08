@@ -6,3 +6,10 @@ build/
 
 # Python temp
 __pycache__/
+
+# (START)
+# Files that are waiting for marketing approval. This block will be removed when logo is chosen and approved.
+assets/KAMK_english_white_copyrighted.svg
+# ... and the files that contain snapshots of the copyrighted image
+tests/frontmatter-fi/ref/*.png
+# (END)

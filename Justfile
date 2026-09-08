@@ -45,7 +45,7 @@ skim:
 
 # Run test suite using Tytanic
 test *args:
-    tt run --no-fail-fast {{args}}
+    tt run --use-system-fonts --no-fail-fast {{args}}
 
 # Run the Python unit tests for the packaging scripts
 test-scripts:
