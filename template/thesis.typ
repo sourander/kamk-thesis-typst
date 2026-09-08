@@ -1,5 +1,4 @@
-// Later, this can just be: #import "@preview/kamk-thesis:1.0.0": template
-#import "../src/lib.typ" as template
+#import "@preview/kamk-thesis:0.1.0" as template
 
 // Single source of truth for the thesis language; reused by every render-* call below.
 #let language = "fi"

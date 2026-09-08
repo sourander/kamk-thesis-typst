@@ -1,11 +1,19 @@
+root := justfile_directory()
+
+export TYPST_ROOT := root
+
 # Variables
 ENTRY_FILE := "template/thesis.typ"
 OUT_DIR := "build"
 OUT_FILE := OUT_DIR + "/thesis.pdf"
 THUMBNAIL_FILE := "thumbnail.png"
 
-# Default recipe: build the PDF
-default: build
+# Use uv for all [script] recipes
+set script-interpreter := ['uv', 'run', '--script']
+
+# Default recipe: list all available recipes
+default:
+    @just --list
 
 # Compile the Typst project to the build directory
 build:
@@ -33,8 +41,45 @@ thumbnail:
         echo "Thumbnail is too large!"; \
         exit 1; \
     fi
-    @echo "Thumbnail generated: {{THUMBNAIL_FILE}}"
 
-# As of now, this works only on macOS that has Skim installed.
+# As of now, this works only on macOS that has Skim installed
 skim:
-    open -a Skim build/thesis.pdf
+    open -a Skim {{OUT_FILE}}
+
+# Run test suite using Tytanic
+test *args:
+    tt run --no-fail-fast {{args}}
+
+# Run the Python unit tests for the packaging scripts
+test-scripts:
+    uv run python -m unittest discover -s scripts/tests
+
+# Update test cases using Tytanic
+update *args:
+    tt update {{args}}
+
+# Print the resolved packaging configuration, optionally resolving a target
+[script]
+setup *args:
+    scripts/typst_package_config.py {{args}}
+
+# Package the library into the specified destination folder
+[script]
+package target:
+    scripts/install_typst_package.py "{{target}}"
+
+# Install the library with the "@local" prefix
+install: (package "@local")
+
+# Install the library with the "@preview" prefix for pre-release testing
+install-preview: (package "@preview")
+
+[private]
+remove target:
+    uv run scripts/remove_typst_package.py "{{target}}"
+
+# Uninstall the library from the "@local" prefix
+uninstall: (remove "@local")
+
+# Uninstall the library from the "@preview" prefix
+uninstall-preview: (remove "@preview")

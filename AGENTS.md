@@ -9,7 +9,12 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 - `just clean` — removes `build/`
 - `just thumbnail` — generates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI)
 - `just skim` — opens `build/thesis.pdf` in Skim (macOS only)
-- Requires `just` and `typst` CLIs.
+- `just package <target>` — packages the library (files per `.typstignore`) into `<target>/<name>/<version>` via `scripts/package`
+- `just install` / `just install-preview` — package into the `@local` / `@preview` Typst package dirs of the user's data dir
+- `just uninstall` / `just uninstall-preview` — remove the installed `<name>/<version>` from the `@local` / `@preview` dirs via `scripts/uninstall`
+- `just pysetup [target]` — print the resolved packaging configuration (install dir, package name, version, target)
+- `just pypackage <target>` / `just pyinstall` / `just pyinstall-preview` / `just pyuninstall` / `just pyuninstall-preview` — Python equivalents of the packaging recipes above, run via `uv`
+- Requires `just` and `typst` CLIs. Packaging recipes additionally require `bash` (original scripts) or `uv` with Python ≥3.13 (py scripts).
 
 ## Structure
 
@@ -21,6 +26,8 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
   - `src/data/` — non-Typst data files: `lang.toml` (fi/en UI labels) and `kamk-vancouver.csl` (citation style), read via relative paths (e.g. `"../data/lang.toml"`) from `src/sections/*.typ`.
 - Tip: the [typst-package-template](https://github.com/typst-community/typst-package-template) repo can be used as a reference for packaging layout (e.g. `typst.toml`, `CHANGELOG.md`, release workflow) when preparing `src/` for publication.
 - Rule of thumb: template/layout changes go in `src/`; thesis content and metadata go in `template/thesis.typ`.
+- `scripts/` — packaging tooling: the original shell scripts (`setup`, `package`, `uninstall`) and their cross-OS Python replacements (`typst_package_config.py`, `install_typst_package.py`, `remove_typst_package.py`). The Python scripts use PEP 723 inline metadata (no dependencies), have no shebangs, and are invoked as `uv run scripts/<name>.py`; `install_typst_package.py`/`remove_typst_package.py` import the shared `setup` module.
+- `.typstignore` — drives what the packagers include: one file (no subdirectory files), patterns match file/directory names from the beginning (`*` also matches `/`), last matching rule wins, and `!` rules re-include. `.git` and `.typstignore` are always excluded. Currently excludes e.g. `scripts`, `build`, `Justfile`, `AGENTS.md`.
 
 ## Verification
 
@@ -35,3 +42,4 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 - Content parameters come in `fi`/`en` pairs (title, degree, programme, keywords, abstract); the `language` param selects which labels are used for the title page, ToC, and symbol list. Adding a language means a new `src/data/lang.toml` section plus wiring in `src/sections/frontmatter.typ`.
 - The body text uses the Carlito font (set in `src/core/config.typ`); users need it installed to match KAMK's look. The README currently has no font-install guide for Windows. Using Calibri as fallback is being considered, but not decided.
 - The README also still shows an older `#import "../src/lib.typ": template` / `template.with(...)` usage snippet; the actual exported entry point is `template.frontmatter.with(...)` (see `template/thesis.typ` for the working example). This drift predates the `core`/`sections`/`data` split and hasn't been fixed yet.
+- The original `scripts/package` uses bash-4+ features (`readarray`) and fails on macOS's default bash 3.2; the `py`-prefixed recipes are the portable alternative. Both packagers write to `<target>/<name>/<version>` (from `typst.toml`) and overwrite an existing same-version install.

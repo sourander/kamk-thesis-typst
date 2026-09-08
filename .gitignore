@@ -1,1 +1,8 @@
+# Developmental PDF files
 build/
+
+# OS files
+.DS_Store
+
+# Python temp
+__pycache__/
