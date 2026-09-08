@@ -8,9 +8,6 @@ OUT_DIR := "build"
 OUT_FILE := OUT_DIR + "/thesis.pdf"
 THUMBNAIL_FILE := "thumbnail.png"
 
-# Use uv for all [script] recipes
-set script-interpreter := ['uv', 'run', '--script']
-
 # Default recipe: list all available recipes
 default:
     @just --list
@@ -78,15 +75,13 @@ bump version:
     # Display the resulting changes.
     @git diff -- typst.toml template/thesis.typ README.md
 
-# Print the resolved packaging configuration, optionally resolving a target
-[script]
-setup *args:
-    scripts/typst_package_config.py {{args}}
+# Print the resolved packaging configuration. Call as `just setup '@preview'`
+setup target:
+    uv run scripts/typst_package_config.py {{target}}
 
 # Package the library into the specified destination folder
-[script]
 package target:
-    scripts/install_typst_package.py "{{target}}"
+    uv run scripts/install_typst_package.py "{{target}}"
 
 # Install the library with the "@local" prefix
 install: (package "@local")
