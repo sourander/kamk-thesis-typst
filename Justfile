@@ -12,20 +12,13 @@ THUMBNAIL_FILE := "thumbnail.png"
 default:
     @just --list
 
-# Compile the Typst project to the build directory
+# Build the thesis PDF from the Typst source file to build/thesis.pdf. Useful for developing.
 build:
-    @mkdir -p {{OUT_DIR}}
-    typst compile --root . {{ENTRY_FILE}} {{OUT_FILE}} # this is only used for Theseus submission version: --pdf-standard 'a-1a'
+    just install-preview
+    mkdir -p {{OUT_DIR}}
+    typst compile --root . {{ENTRY_FILE}} {{OUT_FILE}}
+    just uninstall-preview
     @echo "Build successful: {{OUT_FILE}}"
-
-# Watch for file changes and live-compile
-watch:
-    @mkdir -p {{OUT_DIR}}
-    typst watch --root . {{ENTRY_FILE}} {{OUT_FILE}}
-
-# Remove the build directory
-clean:
-    rm -rf {{OUT_DIR}}
 
 # Generate the template thumbnail required for package submission
 thumbnail:
@@ -56,7 +49,7 @@ update *args:
     tt update {{args}}
 
 # Bump the package version in typst.toml, template/thesis.typ and README.md.
-bump version:
+bump version: (thumbnail)
     # Require the supplied version to match X.Y.Z exactly, using numeric components.
     @perl -e '$v = "{{version}}"; die "bump: version must be X.Y.Z, got \"{{version}}\"\n" unless $v =~ /\A[0-9]+\.[0-9]+\.[0-9]+\z/;'
 

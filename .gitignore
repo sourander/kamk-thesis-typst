@@ -11,5 +11,7 @@ __pycache__/
 # Files that are waiting for marketing approval. This block will be removed when logo is chosen and approved.
 assets/KAMK_english_white_copyrighted.svg
 # ... and the files that contain snapshots of the copyrighted image
-tests/frontmatter-fi/ref/*.png
+# tests/frontmatter-fi/ref/*.png
+# tests/titlepage/ref/*.png
+# MEMO: changed to use assets/logo_temporary.svg for now, to go around this blocker.
 # (END)

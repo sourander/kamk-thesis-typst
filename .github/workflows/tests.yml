@@ -1,0 +1,70 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+
+    strategy:
+      # Run tests on all versions, even if one fails.
+      fail-fast: false
+      matrix:
+        # Add any other Typst versions that your package should support.
+        typst-version:
+          - typst: 0.15
+            tytanic: 0.4
+
+    name: Test for ${{ matrix.typst-version.typst }} (Tytanic ${{ matrix.typst-version.tytanic }})
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Setup Typst
+        id: setup-typst
+        uses: typst-community/setup-typst@v5
+        with:
+          typst-version: ${{ matrix.typst-version.typst }}
+
+      - name: Setup Tytanic
+        uses: typst-community/setup-tytanic@v1
+        with:
+          tytanic-version: ${{ matrix.typst-version.tytanic }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+
+      - name: Install Just
+        uses: taiki-e/install-action@v2
+        with:
+          tool: just
+
+      - name: Run Python tests
+        run: just test-scripts
+
+      - name: Install Carlito font
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes fonts-crosextra-carlito
+          fc-cache --force
+          fc-match Carlito
+
+      - name: Run Tytanic tests
+        run: just test
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: typst-${{ steps.setup-typst.outputs.typst-version }}-test-results
+          path: |
+            tests/**/diff/*.png
+            tests/**/out/*.png
+            tests/**/ref/*.png
+          retention-days: 5
+          if-no-files-found: warn
