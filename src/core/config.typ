@@ -23,12 +23,12 @@
     paper: "a4",
     margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm)
   )
-  show heading: set block(above: 1.5em, below: 2.5em)
+  show heading: set block(above: 3.0em, below: 2.0em)
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
-    v(2.0cm)
     it
   }
+
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
   body

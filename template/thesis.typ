@@ -1,4 +1,4 @@
-#import "@preview/kamk-thesis:0.1.0" as template
+#import "@preview/kamk-thesis:0.0.1" as template
 
 // Single source of truth for the thesis language; reused by every render-* call below.
 #let language = "fi"
@@ -47,7 +47,6 @@
   Tästä alkaa opinnäytetyön varsinainen sisältö. Jokainen kappale on oma tiedostonsa, joka tuodaan tähän päädokumenttiin. Tiedostot sijaitsevat kansiossa `src/chapters/`. Kappaleiden järjestystä voi muuttaa muuttamalla tuontijärjestystä. Nämä tiedostot ja niiden sisällön kirjoittaminen on sinun tehtäväsi opinnäytetyön kirjoittajana.
 */
 #include "chapters/johdanto.typ"
-#include "chapters/mallipohjankayttaminen.typ"
 #include "chapters/sivut.typ"
 
 #template.render-ai-usage(

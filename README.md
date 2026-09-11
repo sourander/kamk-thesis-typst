@@ -8,7 +8,7 @@ A Typst template for theses at Kajaani University of Applied Sciences (KAMK): ti
 These instructions will get you a copy of the project up and running locally. [`template/thesis.typ`](template/thesis.typ) is a ready-made entry document you can copy and fill in with your thesis content.
 
 ```typ
-#import "@preview/kamk-thesis:0.1.0" as template
+#import "@preview/kamk-thesis:0.0.1" as template
 
 #show: template.frontmatter.with(
   // Perustiedot
@@ -33,9 +33,7 @@ These instructions will get you a copy of the project up and running locally. [`
 Prerequisites: the [`typst`](https://typst.app/docs/) and [`just`](https://github.com/casey/just) CLIs.
 
 ```
-$ git clone https://github.com/sourander/kamk-thesis-typst
-$ cd kamk-thesis-typst
-$ just build   # compiles template/thesis.typ → build/thesis.pdf
+typst install @preview/kamk-thesis:0.0.1
 ```
 
 ## Font installation

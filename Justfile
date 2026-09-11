@@ -21,7 +21,7 @@ build:
     @echo "Build successful: {{OUT_FILE}}"
 
 # Generate the template thumbnail required for package submission
-thumbnail:
+thumbnail: install-preview
     typst compile --root . -f png --pages 1 --ppi 150 {{ENTRY_FILE}} {{THUMBNAIL_FILE}}
     @echo "Thumbnail generated: {{THUMBNAIL_FILE}}"
     @echo "Check that the file is < 3 MB (Typst package submission limit)"
@@ -49,7 +49,7 @@ update *args:
     tt update {{args}}
 
 # Bump the package version in typst.toml, template/thesis.typ and README.md.
-bump version: (thumbnail)
+bump version: && thumbnail
     # Require the supplied version to match X.Y.Z exactly, using numeric components.
     @perl -e '$v = "{{version}}"; die "bump: version must be X.Y.Z, got \"{{version}}\"\n" unless $v =~ /\A[0-9]+\.[0-9]+\.[0-9]+\z/;'
 
@@ -64,9 +64,6 @@ bump version: (thumbnail)
 
     # Look for a Typst package reference such as: kamk-thesis:0.1.0
     @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' README.md
-
-    # Display the resulting changes.
-    @git diff -- typst.toml template/thesis.typ README.md
 
 # Print the resolved packaging configuration. Call as `just setup '@preview'`
 setup target:

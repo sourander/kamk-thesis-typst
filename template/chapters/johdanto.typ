@@ -1,6 +1,6 @@
 = Johdanto
 
-Tämä on opinnäytetyön ensimmäinen luku. Sivun asetukset (marginaalit yms.) ovat nyt KAMK:n ohjeiden mukaiset tästä eteenpäin automaattisesti.
+Tähän tulee johdanto. Alla on kaksi kappaletta generoitua _lorem ipsum_-täytetekstiä.
 
 #lorem(100)
 
