@@ -25,6 +25,10 @@ jobs:
   # The build job is created using the typst/communitytypst-package-template repository as a guide,
   # but fitted for my Python script automation (over Bash scripts) for easier testing and better cross OS support.
   build:
+    outputs:
+      pkg-name: ${{ steps.metadata.outputs.name }}
+      pkg-version: ${{ steps.metadata.outputs.version }}
+      pkg-id: ${{ steps.metadata.outputs.id }}
     name: Build package artifact
     runs-on: ubuntu-latest
 
