@@ -1,6 +1,7 @@
 #import "../core/config.typ": setup-document, setup-body-page
 #import "titlepage.typ": titlepage
 #import "abstract.typ": render-abstract
+#import "foreword.typ": render-foreword
 
 // Load the translations
 #let lang-data = toml("../data/lang.toml")
@@ -18,6 +19,7 @@
   keywords-en: (),
   abstract-fi: none,
   abstract-en: none,
+  foreword: none,
   symbols: (),
   date: datetime.today(),
   language: "fi",
@@ -67,6 +69,12 @@
       )
 
       pagebreak(weak: true)
+
+      // Alkusanat / Foreword (optional)
+      if foreword != none {
+        render-foreword(language: language, foreword)
+        pagebreak(weak: true)
+      }
 
       // 3. Sisällys / Table of Contents
       {

@@ -49,6 +49,11 @@
     The second paragraph verifies paragraph spacing.
   ],
 
+  // Alkusanat
+  foreword: [
+    Tämä on alkusanat-sivun regressiotesti.
+  ],
+
   // Symboliluettelo
   symbols: (
     ("AMK", "Ammattikorkeakoulu"),

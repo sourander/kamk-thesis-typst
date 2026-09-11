@@ -36,6 +36,11 @@
     #lorem(70)
   ],
 
+  // Alkusanat (valinnainen)
+  foreword: [
+    Tähän voit kirjoittaa opinnäytetyön alkusanat, esimerkiksi kiitokset ohjaajalle, toimeksiantajalle tai muille tahoille.
+  ],
+
   // Symboliluettelo (valinnainen)
   symbols: (
     ("AMK", "Ammattikorkeakoulu"),

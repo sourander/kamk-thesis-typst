@@ -17,7 +17,7 @@
   show heading: set block(below: 1.5em)
 
   // Not outlined (not in Table of Contents)
-  heading(level: 1, outlined: false, lang-dict.abstract)
+  heading(level: 1, outlined: false, strong(lang-dict.abstract))
 
   // Metadata block: Author, Title, Degree, Keywords
     block[
