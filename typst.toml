@@ -28,6 +28,7 @@ exclude = [
     ".typstignore",
     "AGENTS.md",
     "Justfile",
+    "assets/KAMK_english_white_copyrighted.svg",
 ]
 
 [template]

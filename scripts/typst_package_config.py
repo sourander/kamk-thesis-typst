@@ -48,6 +48,31 @@ def version() -> str:
     return str(manifest()["version"])
 
 
+def package_id() -> str:
+    """The '<name>-<version>' identifier used for release artifacts."""
+    return f"{package_prefix()}-{version()}"
+
+
+def write_github_output(ref_name: str) -> None:
+    """Write name/version/id to $GITHUB_OUTPUT and verify ref_name matches 'v<version>'.
+
+    Exits with an error if the GITHUB_OUTPUT env var is unset, or if ref_name doesn't match.
+    """
+    output_path = os.environ.get("GITHUB_OUTPUT")
+    if not output_path:
+        raise SystemExit("write_github_output: GITHUB_OUTPUT is not set")
+
+    name, pkg_version = package_prefix(), version()
+    with open(output_path, "a") as output:
+        print(f"name={name}", file=output)
+        print(f"version={pkg_version}", file=output)
+        print(f"id={name}-{pkg_version}", file=output)
+
+    expected_tag = f"v{pkg_version}"
+    if ref_name != expected_tag:
+        raise SystemExit(f"Tag {ref_name} does not match {expected_tag}")
+
+
 def resolve_target(target: str) -> Path:
     """Resolve a package target (@local, @preview, or a directory)."""
     match target:
@@ -62,9 +87,16 @@ def resolve_target(target: str) -> Path:
 def main(argv: list[str]) -> int:
     if argv and argv[0] in ("help", "-h", "--help"):
         print("usage: uv run scripts/typst_package_config.py [target]")
+        print("       uv run scripts/typst_package_config.py github-output")
         print("")
         print("Prints the resolved packaging configuration. If TARGET is given")
         print("(@local, @preview, or a directory), the resolved target is shown too.")
+        print("")
+        print("'github-output' writes name/version/id to $GITHUB_OUTPUT and checks")
+        print("that the $GITHUB_REF_NAME env var matches the 'v<version>' tag.")
+        return 0
+    if argv and argv[0] == "github-output":
+        write_github_output(os.environ.get("GITHUB_REF_NAME", ""))
         return 0
     print(f"root: {ROOT}")
     print(f"data_dir: {data_dir()}")

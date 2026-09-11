@@ -1,7 +1,6 @@
 # Developer guide
 
-This will include things like:
-
+This guide is currently in draft/scratch/memo phase. It will include things like:
 
 Dependencies: 
 
@@ -27,3 +26,14 @@ just test
 ```
 
 Then, you can add your test files to the `tests/my-test-name` folder. The test will be run automatically when you run `just test`.
+
+## Token
+
+This repository requires a GitHub Fine-Grained PAT (Personal Access Token). For this, a token called `typst-package-token` has been created. It has the following permissions:
+
+* Only selected repositories: `kamk-thesis-typst`
+* Repository permissions:
+  * Contents: Read and Write
+  * Metadata: Read (*note: this is GitHub default*)
+
+It has been added to this repository's (`sourander/kamk-thesis-typst`) secrets into `Settings > Secrets and variables > Actions` as a repository secret called `REGISTRY_TOKEN`.

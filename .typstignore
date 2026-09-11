@@ -12,4 +12,3 @@ tests
 build
 Justfile
 AGENTS.md
-.DS_Store
