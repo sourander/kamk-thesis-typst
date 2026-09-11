@@ -74,10 +74,10 @@ jobs:
             "${{ steps.metadata.outputs.name }}"
 
       - name: Upload package artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: ${{ steps.metadata.outputs.id }}
           path: dist/${{ steps.metadata.outputs.id }}.zip
+          archive: false
           retention-days: 5
           if-no-files-found: error
 
@@ -98,7 +98,7 @@ jobs:
 #           sparse-checkout: ${{ env.PATH_PREFIX }}/${{ needs.build.outputs.pkg-name }}/${{ needs.build.outputs.pkg-version }}
 
 #       - name: Download artifacts
-#         uses: actions/download-artifact@v4
+#         uses: actions/download-artifact@v4  # TODO! Update to v8 and check API.
 #         with:
 #           pattern: ${{ needs.build.outputs.pkg-id }}
 

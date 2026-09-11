@@ -37,3 +37,34 @@ This repository requires a GitHub Fine-Grained PAT (Personal Access Token). For 
   * Metadata: Read (*note: this is GitHub default*)
 
 It has been added to this repository's (`sourander/kamk-thesis-typst`) secrets into `Settings > Secrets and variables > Actions` as a repository secret called `REGISTRY_TOKEN`.
+
+
+## Pushing a new release
+
+Most steps missing from guide. One of the earliest steps is:
+
+```
+just bump 1.2.3
+```
+
+One of the last steps is:
+
+```
+# After git push and checking tests, run:
+git tag -a v1.2.3 -m "Release v1.2.3"
+git push origin v1.2.3
+```
+
+### Retrying a failed release
+
+If there would be a reason to retry after a failed tag release, one would need to:
+
+```bash
+# Delete
+git tag -d v1.2.3
+git push origin :refs/tags/v1.2.3
+
+# Create again
+git tag -a v1.2.3 -m "Release v1.2.3"
+git push origin v1.2.3
+```
