@@ -41,19 +41,24 @@ It has been added to this repository's (`sourander/kamk-thesis-typst`) secrets i
 
 ## Pushing a new release
 
-Most steps missing from guide. One of the earliest steps is:
+At this point, you need to do the following steps:
 
-```
-just bump 1.2.3
-```
+1. Implement the new features or bug fixes in the code.
+2. Test locally using `just test` to ensure everything works as expected.
+3. Push to GitHub and see that the tests pass in the CI/CD pipeline.
+4. Perform a version bump with `just bump 1.2.3` (or whatever the new version is).
+5. Update the `CHANGELOG.md` file.
+6. Commit the changes and push to GitHub.
+7. Check that the tests pass in the CI/CD pipeline again.
+8. Add a new tag for the release. This will trigger the Github Action for CD. It will push the package to `sourander/typst-packages` that is a fork of `typst/packages`. 
 
-One of the last steps is:
-
-```
-# After git push and checking tests, run:
-git tag -a v1.2.3 -m "Release v1.2.3"
-git push origin v1.2.3
-```
+    ```
+    # After git push and checking tests, run:
+    git tag -a v1.2.3 -m "Release v1.2.3"
+    git push origin v1.2.3
+    ```
+9. Check the GitHub Actions tab to see that the release workflow has completed successfully. If it fails, you can retry the release (see below).
+10. Create a Pull Request (PR) to merge the changes from the fork repository to the upstream repository, `typst/packages`. This will make the new release available in the Typst package registry. See below for instructions on how to create a PR.
 
 ### Retrying a failed release
 
@@ -68,3 +73,18 @@ git push origin :refs/tags/v1.2.3
 git tag -a v1.2.3 -m "Release v1.2.3"
 git push origin v1.2.3
 ```
+
+## Create PR
+
+### Updating the fork repository
+
+To update the fork repository with the latest changes from the upstream repository, potentially quickest way is to press the **Sync fork** button on the GitHub web interface (and then press **Update branch**). This will update the fork repository with the latest changes from the upstream repository.
+
+### Merging with the upstream repository
+
+To start a Pull Request (PR) to merge the changes from the fork repository to the upstream repository, `typst/packages`, one can use the GitHub web interface. The steps are:
+
+1. Go to the fork repository on GitHub.
+2. Click on the **Pull requests** tab.
+3. Click on the **New pull request** button.
+
