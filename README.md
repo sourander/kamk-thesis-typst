@@ -5,7 +5,17 @@ A Typst template for theses at Kajaani University of Applied Sciences (KAMK): ti
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running locally. [`template/thesis.typ`](template/thesis.typ) is a ready-made entry document you can copy and fill in with your thesis content.
+### Installation
+
+Prerequisites: the [`typst`](https://typst.app/docs/) and [`just`](https://github.com/casey/just) CLIs.
+
+```
+typst install @preview/kamk-thesis:0.0.1
+```
+
+### Usage
+
+After installation, you need to modify the `thesis.typ` file to include your own content. Below is a minified example of what the file contains. The `#show` block is where you define the front matter parameters, and the `#include` statements are where you include your body chapters.
 
 ```typ
 #import "@preview/kamk-thesis:0.0.1" as template
@@ -25,16 +35,18 @@ These instructions will get you a copy of the project up and running locally. [`
 #include "chapters/mallipohjankayttaminen.typ"
 #include "chapters/sivut.typ"
 
-// ...
+// ... AI usage declaration, bibliography and appendices follow, see the thesis.typ for full example.
 ```
 
-### Installation
+### Previewing your thesis
 
-Prerequisites: the [`typst`](https://typst.app/docs/) and [`just`](https://github.com/casey/just) CLIs.
+When you want to see a preview of your thesis, run the following `Justfile` command in the terminal. It will create a `build/thesis.pdf` file with your thesis content and keep the file updated as you edit your source files. You may exit this mode with `Ctrl` + `C` when you are done.
 
 ```
-typst install @preview/kamk-thesis:0.0.1
+just preview
 ```
+
+See the Zesical-generated documentation at [https://sourander.github.io/kamk-thesis-typst/](https://sourander.github.io/kamk-thesis-typst/) for more usage examples, video tutorials and so on.
 
 ## Font installation
 
@@ -64,25 +76,18 @@ brew install --cask font-carlito
 
 ## Usage
 
-`template` renders the full front matter (title page, Tiivistelmä, Abstract, Sisällys, optional symbol list) followed by your body content, with A4 paper, KAMK margins, and heading/page-numbering rules applied automatically. All content parameters come in `fi`/`en` pairs; the `language` parameter selects which labels are used for the title page, table of contents, and symbol list.
+`template` renders the full front matter (title page, Tiivistelmä, Abstract, Sisällys, optional symbol list) followed by your body content, with A4 paper, KAMK margins, and heading/page-numbering rules applied automatically. All content parameters come in `fi`/`en` pairs; the `language` parameter selects which labels are used for the title page, table of contents, and symbol list. A complete worked example lives in [`template/thesis.typ`](template/thesis.typ).
 
-Template arguments:
+For more usage examples, see the Zensical-generated documentation at [https://sourander.github.io/kamk-thesis-typst/](https://sourander.github.io/kamk-thesis-typst/).
 
-- `title` / `title-en` — thesis title
-- `authors` — tuple of author names
-- `degree-title` / `degree-title-en` — e.g. "Tradenomi (AMK)"
-- `degree-programme` / `degree-programme-en` — e.g. "Tietojenkäsittely"
-- `keywords-fi` / `keywords-en` — tuples of keywords
-- `abstract-fi` / `abstract-en` — abstract content
-- `symbols` — optional list of `(abbreviation, expansion)` pairs, rendered as a list of symbols
-- `date` — defaults to today
-- `language` — `"fi"` or `"en"`
-- `cover-image` — optional image overriding the default KAMK cover
-- `body` — the thesis chapters
+## Problems and Contributing
 
-A complete worked example lives in [`template/thesis.typ`](template/thesis.typ).
+For any problems, please contact the key maintainer, Jani Sourander. You should be KAMK's student if you are reading this. Use KAMK's internal communication channels to reach out to me.
+
+For contributing, see [`CONTRIBUTE.md`](CONTRIBUTE.md) for instructions on how to set up a development environment and run tests.
 
 ## Acknowledgments
 
 - Heavily inspired by the [WUT diploma thesis template](https://github.com/fuine/wut-thesis-typst) by Warsaw University of Technology in how the files are organized and named.
-- Released under the [MIT No Attribution License](LICENSE).
+- Source code released under the [MIT No Attribution License](LICENSE).
+- IMPORTANT! The project contains KAMK logo and design choices that are the property of Kajaani University of Applied Sciences Oy. If you were to modify this template for other University's thesis, remove KAMK logo and redesign title page.

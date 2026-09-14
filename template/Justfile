@@ -1,0 +1,22 @@
+# Variables
+ENTRY_FILE := "thesis.typ"
+OUT_DIR := "build"
+OUT_FILE := OUT_DIR + "/thesis.pdf"
+
+# Draft will be written to build/thesis-draft-YYYY-MM-DD.pdf and use the PDF/UA-1 standard.
+OUT_DRAFT_FILE := OUT_DIR + "/thesis-draft-" + datetime("%Y-%m-%d") + ".pdf"
+
+# Default recipe: list all available recipes
+default:
+    @just --list
+
+# Render a update-on-save preview of the thesis PDF.
+watch:
+    mkdir -p {{OUT_DIR}}
+    typst watch --root . {{ENTRY_FILE}} {{OUT_FILE}}
+
+# Render a date-versioned one-off build of the thesis PDF (PDF/UA-1 compliant)
+draft:
+    mkdir -p {{OUT_DIR}}
+    typst compile --root . --pdf-standard ua-1 {{ENTRY_FILE}} {{OUT_DRAFT_FILE}}
+    @echo "Draft build successful: {{OUT_DRAFT_FILE}}"

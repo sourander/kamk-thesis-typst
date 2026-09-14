@@ -7,6 +7,9 @@ build/
 # Python temp
 __pycache__/
 
+# Locally built Zensical docs
+/site
+
 # (START)
 # Files that are waiting for marketing approval. This block will be removed when logo is chosen and approved.
 assets/KAMK_english_white_copyrighted.svg

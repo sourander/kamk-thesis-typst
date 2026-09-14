@@ -88,3 +88,7 @@ uninstall: (remove "@local")
 
 # Uninstall the library from the "@preview" prefix
 uninstall-preview: (remove "@preview")
+
+# Run docs locally for development.
+docs:
+    uvx zensical serve
