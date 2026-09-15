@@ -12,21 +12,21 @@
   // cover-image: false,                                                      // Optional; explicitly disable the cover image entirely
 
   // Suomenkieliset tiedot
-  title: "Typst-pohjan kehittäminen Kajaanin ammattikorkeakoululle",
+  title: "Opinnäytetyön otsikko suomeksi",
   degree-title: "Tradenomi (AMK)",
   degree-programme: "Tietojenkäsittely",
-  keywords-fi: ("Typst", "mallipohja", "asiakirjahallinta", "AMK"),
+  keywords-fi: ("aerosolifysiikka", "avainsana 2", "avainsana 3"),
   abstract-fi: [
     Tähän tulee opinnäytetyön suomenkielinen tiivistelmä. Typst sallii kappalejakojen tekemisen yksinkertaisesti jättämällä tyhjän rivin tekstien väliin.
     
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Tämä tässä on toinen kappale tiivistelmässä.
   ],
 
   // Englanninkieliset tiedot
-  title-en: "Developing a Typst Template for Kajaani University of Applied Sciences",
+  title-en: "The title of the thesis in English",
   degree-title-en: "Bachelor of Business Administration",
   degree-programme-en: "Business Information Technology",
-  keywords-en: ("Typst", "template", "document management", "UAS"),
+  keywords-en: ("aerosol physics", "keyword 2", "keyword 3"),
   abstract-en: [
     
     #lorem(50)

@@ -1,6 +1,6 @@
 = Tämä on luku
 
-Tämä on tyypillinen opinnäytetyön luku. Kirjoita se yhteen tiedostoon. Tee yksi tiedosto per luku.
+Tämä on tyypillinen opinnäytetyön luku. Kirjoita se yhteen tiedostoon. Tee yksi tiedosto per luku. Näissä voi viitata lähteisiin, kuten näin @gutmanBecomingDataHead2021.
 
 == Luvun toisen tason otsikko
 

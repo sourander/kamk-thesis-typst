@@ -43,7 +43,7 @@
     ]
 
     // These settings apply to all pages from now on, until told otherwise.
-    setup-body-page({
+    setup-body-page(language: language, {
       // Finnish abstract (Tiivistelmä)
       render-abstract(
         lang-data.at("fi"),

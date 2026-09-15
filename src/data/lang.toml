@@ -18,6 +18,7 @@ ai_usage_declaration = "Vakuutus - Olen tietoinen siitä, että olen täysin vas
 references_heading = "Lähteet"
 appendices_heading = "Liitteet"
 appendix = "Liite"
+equation = "Kaava"
 
 [en]
 university = "Kajaani University of Applied Sciences"
@@ -39,3 +40,4 @@ ai_usage_declaration = "Declaration - I am aware that I am fully responsible for
 references_heading = "References"
 appendices_heading = "Appendices"
 appendix = "Appendix"
+equation = "Equation"

@@ -9,6 +9,21 @@
 }
 
 /*
+  Equation numbering defaults, kept separate from setup-body-page so it can be
+  applied and tested on its own (see tests/math-fi).
+  Takes `body` for the same set-rule-scoping reason as setup-document.
+
+  - Uses Typst's built-in equation numbering (no custom counters/layout)
+  - Wraps the number in parentheses, e.g. "(1)", per KAMK conventions
+  - Uses the localized "Kaava"/"Equation" supplement instead of Typst's default "Equation"
+  */
+#let setup-math(language: "fi", body) = {
+  let lang-data = toml("../data/lang.toml")
+  set math.equation(numbering: "(1)", supplement: lang-data.at(language).equation)
+  body
+}
+
+/*
   Page/heading defaults for everything after the (zero-margin) title page.
   Takes `body` for the same set-rule-scoping reason as setup-document.
 
@@ -17,8 +32,9 @@
   - Sets H1 headings to have a page break before them and a gap above them
   - Sets a one-line empty gap between body text paragraphs
   - Resets heading text to non-bold 11pt (overrides the Typst default heading style)
+  - Applies the parenthesized equation numbering from setup-math
   */
-#let setup-body-page(body) = {
+#let setup-body-page(language: "fi", body) = {
   set page(
     paper: "a4",
     margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm)
@@ -31,6 +47,5 @@
 
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
-  body
+  setup-math(language: language, body)
 }
-
