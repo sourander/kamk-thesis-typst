@@ -19,6 +19,7 @@ references_heading = "Lähteet"
 appendices_heading = "Liitteet"
 appendix = "Liite"
 equation = "Kaava"
+chapter = "Luku"
 
 [en]
 university = "Kajaani University of Applied Sciences"
@@ -41,3 +42,4 @@ references_heading = "References"
 appendices_heading = "Appendices"
 appendix = "Appendix"
 equation = "Equation"
+chapter = "Chapter"

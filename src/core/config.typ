@@ -24,6 +24,21 @@
 }
 
 /*
+  Heading reference supplement, kept separate so it can be applied and tested
+  on its own (see tests/ch-labels-fi). Takes `body` for the same set-rule-scoping
+  reason as setup-document.
+
+  - Uses the localized "Luku"/"Chapter" supplement for heading references
+  - Heading numbering itself (e.g. "1.1") is enabled later, once the ToC has
+    been rendered (see frontmatter.typ), so a reference reads as "Luku 2.3"
+  */
+#let setup-headings(language: "fi", body) = {
+  let lang-data = toml("../data/lang.toml")
+  set heading(supplement: lang-data.at(language).chapter)
+  body
+}
+
+/*
   Page/heading defaults for everything after the (zero-margin) title page.
   Takes `body` for the same set-rule-scoping reason as setup-document.
 
@@ -33,6 +48,7 @@
   - Sets a one-line empty gap between body text paragraphs
   - Resets heading text to non-bold 11pt (overrides the Typst default heading style)
   - Applies the parenthesized equation numbering from setup-math
+  - Applies the localized chapter/heading reference supplement from setup-headings
   */
 #let setup-body-page(language: "fi", body) = {
   set page(
@@ -47,5 +63,5 @@
 
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
-  setup-math(language: language, body)
+  setup-headings(language: language, setup-math(language: language, body))
 }
