@@ -1,3 +1,5 @@
+#import "colors.typ": code-block-bg
+
 // Document-wide defaults: metadata, base text/paragraph style. Applied once, at the very start.
 // Takes `body` so the set/show rules stay in scope for the rest of the document, since Typst
 // scopes them to the block they're defined in rather than leaking into the caller.
@@ -64,4 +66,110 @@
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
   setup-headings(language: language, setup-math(language: language, body))
+}
+
+/*
+  Renders a code listing as a figure, with automatic short/long-form behaviour
+  based on line count:
+
+  - Short (< 10 lines): no line numbers, no caption.
+  - Long (>= 10 lines): line numbers, caption is required.
+
+  Both forms get a light-grey, full-text-width background. An `alt`
+  description is accepted but optional.
+
+  Short blocks use a dedicated, un-numbered figure kind so they don't consume
+  a slot in the long-block numbering sequence (which would otherwise leave
+  gaps in the visible "Koodi N" / "Code N" captions).
+
+  `code` must be a raw element (i.e. a fenced ```lang ... ``` block), since its
+  `.text` field is inspected to count lines automatically.
+*/
+#let code-block(
+  alt: none,
+  caption: none,
+  language: "fi",
+  code,
+) = {
+  let lang-data = toml("../data/lang.toml")
+
+  let is-long = code.text.split("\n").len() >= 10
+
+  if is-long {
+    assert(
+      caption != none,
+      message: "code-block: >= 10 rivin koodilohko vaatii kuvatekstin (caption).",
+    )
+  }
+
+let styled-code = {
+  // Set the code font and size.
+  show raw.where(block: true): set text(
+    // font: "DejaVu Sans Mono",
+    size: 10pt,
+  )
+
+  // Control the line spacing within a code block.
+  show raw.where(block: true): set par(leading: 0.75em)
+
+  show raw.line: line => {
+    if is-long {
+      box(width: 1.25em)[
+        #align(
+          right,
+          text(
+            // font: "DejaVu Sans Mono",
+            size: 10pt,
+            fill: gray,
+            str(line.number),
+          ),
+        )
+      ] + h(1.5em) + line.body
+    } else {
+      line
+    }
+  }
+
+  block(
+    width: 100%,
+    fill: code-block-bg,
+    inset: 1em,
+    radius: 4pt,
+    breakable: true,
+  )[
+    #align(left)[
+      #code
+    ]
+  ]
+}
+
+  if is-long {
+    figure(
+      styled-code,
+      caption: caption,
+      alt: alt,
+      kind: raw,
+      supplement: lang-data.at(language).code,
+      numbering: "1",
+    )
+  } else {
+    figure(
+      block(width: 100%)[
+        #grid(
+          columns: (1fr, auto),
+          column-gutter: 1em,
+          align: (left, right + horizon),
+          styled-code,
+          context counter(
+            figure.where(kind: raw)
+          ).display("(1)"),
+        )
+      ],
+      alt: alt,
+      kind: raw,
+      supplement: lang-data.at(language).code,
+      numbering: "1",
+      outlined: false,
+    )
+  }
 }

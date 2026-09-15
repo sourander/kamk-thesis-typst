@@ -20,6 +20,7 @@ appendices_heading = "Liitteet"
 appendix = "Liite"
 equation = "Kaava"
 chapter = "Luku"
+code = "Koodi"
 
 [en]
 university = "Kajaani University of Applied Sciences"
@@ -43,3 +44,4 @@ appendices_heading = "Appendices"
 appendix = "Appendix"
 equation = "Equation"
 chapter = "Chapter"
+code = "Code"
