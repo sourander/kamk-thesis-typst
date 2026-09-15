@@ -64,6 +64,10 @@ pymdownx.details = {}
 pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
 pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
 
+# Grids
+attr_list = {}
+md_in_html = {}
+
 # Keyboard symbols
 pymdownx.keys = {}
 

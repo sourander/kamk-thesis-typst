@@ -1,0 +1,5 @@
+nav:
+  - typst.md
+  - just.md
+  - pdf.md
+  - "*"

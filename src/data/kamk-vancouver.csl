@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="fi-FI">
+<style
+    xmlns="http://purl.org/net/xbiblio/csl"
+    class="in-text"
+    version="1.0"
+    default-locale="fi-FI"
+>
   <info>
     <title>KAMK Vancouver</title>
     <id>https://github.com/sourander/kamk-thesis-typst/raw/refs/heads/main/src/data/kamk-vancouver.csl</id>
     <updated>2026-09-07T00:00:00+00:00</updated>
-    <link href="https://libguides.kamk.fi/vancouver" rel="documentation"/>
+    <link
+      href="https://libguides.kamk.fi/vancouver"
+      rel="documentation"
+    />
   </info>
 
-  <!-- Custom local overrides for the Finnish dictionary -->
+    <!-- Custom local overrides for the Finnish dictionary -->
   <locale xml:lang="fi">
     <terms>
       <term name="available at">saatavilla</term>
@@ -15,11 +23,12 @@
     </terms>
   </locale>
 
-  <!-- Formats inline citations as [1] or [1, Luku 4] -->
+    <!-- Formats inline citations as [1] or [1, Luku 4] -->
   <citation collapse="citation-number">
     <sort>
       <key variable="citation-number"/>
     </sort>
+
     <layout prefix="[" suffix="]" delimiter="; ">
       <group delimiter=", ">
         <text variable="citation-number"/>
@@ -30,13 +39,23 @@
 
   <macro name="author">
     <names variable="author">
-      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", "/>
+      <name
+        name-as-sort-order="all"
+        sort-separator=" "
+        initialize-with=""
+        delimiter=", "
+      />
     </names>
   </macro>
 
   <macro name="editor">
     <names variable="editor">
-      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", "/>
+      <name
+        name-as-sort-order="all"
+        sort-separator=" "
+        initialize-with=""
+        delimiter=", "
+      />
       <label form="short" prefix=", "/>
     </names>
   </macro>
@@ -51,24 +70,27 @@
   <bibliography second-field-align="flush">
     <layout>
       <text variable="citation-number" suffix=". "/>
-      
-      <!-- Smart Grouping: Automatically handles trailing periods -->
+
+            <!-- Smart grouping automatically handles trailing periods -->
       <group delimiter=". " suffix=".">
         <text macro="author"/>
 
         <choose>
-          <!-- Book -->
+                    <!-- Book -->
           <if type="book">
             <group delimiter=". ">
               <group delimiter=" ">
                 <text variable="title" font-style="italic"/>
                 <text variable="medium" prefix="[" suffix="]"/>
               </group>
+
               <text variable="edition"/>
+
               <group delimiter=" ">
                 <text variable="collection-title"/>
                 <text variable="collection-number"/>
               </group>
+
               <group delimiter="; ">
                 <text macro="publisher"/>
                 <date variable="issued">
@@ -77,12 +99,14 @@
               </group>
             </group>
           </if>
-          
-          <!-- Journal Article -->
+
+                    <!-- Journal article -->
           <else-if type="article-journal">
             <text variable="title" font-style="italic"/>
+
             <group delimiter=" ">
               <text variable="container-title"/>
+
               <group>
                 <date variable="issued" suffix=";">
                   <date-part name="year"/>
@@ -94,36 +118,51 @@
             </group>
           </else-if>
 
-          <!-- Book Section (Chapter) -->
+                    <!-- Conference paper -->
+            <else-if type="paper-conference">
+            <text variable="title" font-style="italic"/>
+
+            <group delimiter=" ">
+                <text term="in" text-case="capitalize-first" suffix=":"/>
+                <text variable="container-title"/>
+            </group>
+
+            <group delimiter="">
+                <date variable="issued">
+                <date-part name="year"/>
+                </date>
+                <text variable="volume" prefix=";"/>
+                <text variable="page" prefix=":"/>
+            </group>
+            </else-if>
+
+                    <!-- Book section or chapter -->
           <else-if type="chapter">
             <text variable="title" font-style="italic"/>
+
             <group delimiter=" ">
               <text term="in" text-case="capitalize-first" suffix=":"/>
               <text macro="editor"/>
             </group>
+
             <text variable="container-title"/>
+
             <group delimiter="; ">
               <text macro="publisher"/>
               <date variable="issued">
                 <date-part name="year"/>
               </date>
             </group>
+
             <text variable="page"/>
           </else-if>
 
-          <!-- Thesis -->
+                    <!-- Thesis -->
           <else-if type="thesis">
             <group delimiter=" ">
               <text variable="title" font-style="italic"/>
-              <choose>
-                <if variable="genre">
-                  <text variable="genre" prefix="[" suffix="]"/>
-                </if>
-                <else>
-                  <text value="[Opinnäytetyö]"/>
-                </else>
-              </choose>
             </group>
+
             <group delimiter="; ">
               <text macro="publisher"/>
               <date variable="issued">
@@ -132,9 +171,10 @@
             </group>
           </else-if>
 
-          <!-- Legislation & Standards (Law, Reports) -->
+                    <!-- Legislation and standards -->
           <else-if type="legislation report bill" match="any">
             <text variable="title" font-style="italic"/>
+
             <group delimiter=". ">
               <text macro="publisher"/>
               <date variable="issued">
@@ -143,77 +183,89 @@
             </group>
           </else-if>
 
-          <!-- FAILSAFE FALLBACK (Typst @unpublished) -->
-          <!-- Prints absolutely nothing but the title string. Useful if a student needs a quick hack. -->
+                    <!-- Failsafe fallback for Typst @unpublished -->
           <else-if type="manuscript">
             <text variable="title" font-style="italic"/>
           </else-if>
 
-          <!-- UNIVERSAL DIGITAL & AV MEDIA (Webpages, Podcasts, Games, Videos, Emails, Intranet) -->
-          <else-if type="webpage post-weblog post software dataset motion_picture broadcast song speech personal_communication" match="any">
+                    <!-- Universal digital and AV media -->
+            <else-if
+            type="webpage post-weblog post software dataset motion_picture broadcast song speech personal_communication"
+            match="any"
+            >
             <group delimiter=". ">
-              <group delimiter=" ">
-                <text variable="title" font-style="italic"/>
-                <choose>
-                  <if variable="medium">
-                    <!-- Enables [Podcast], [Intranet], [Sähköposti], [Mobiilipeli] dynamically -->
-                    <text variable="medium" prefix="[" suffix="]"/>
-                  </if>
-                  <else-if variable="genre">
-                    <text variable="genre" prefix="[" suffix="]"/>
-                  </else-if>
-                  <else-if type="dataset">
-                    <text value="[Tilasto]"/>
-                  </else-if>
-                  <else-if type="webpage post-weblog">
-                    <text value="[Internet]"/>
-                  </else-if>
-                </choose>
-              </group>
-              
-              <!-- container-title captures things like "Yle Areena" or "Youtube" -->
-              <text variable="container-title"/>
-              <text variable="publisher"/>
-              
-              <!-- Date formatting changed to form="numeric" to output 3.1.2023 instead of 03.01.2023 -->
-              <group delimiter=" ">
+                            <!-- Title -->
+                <text variable="title"/>
+
+                            <!-- Description or selected variables -->
+                <text variable="note"/>
+
+                            <!-- Publisher or organization -->
+                <text variable="publisher"/>
+
+                            <!-- Publication date and optional access date -->
+                <group delimiter=" ">
                 <date variable="issued">
-                  <date-part name="day" form="numeric" suffix="."/>
-                  <date-part name="month" form="numeric" suffix="."/>
-                  <date-part name="year"/>
-                </date>
-                <group prefix="[" suffix="]">
-                  <text term="accessed" suffix=" "/>
-                  <date variable="accessed">
                     <date-part name="day" form="numeric" suffix="."/>
                     <date-part name="month" form="numeric" suffix="."/>
                     <date-part name="year"/>
-                  </date>
-                </group>
-              </group>
-            </group>
-          </else-if>
-          
-          <!-- Catch-all for anything else not defined above -->
-          <else>
-             <group delimiter=". ">
-                <text variable="title" font-style="italic"/>
-                <text macro="publisher"/>
-                <date variable="issued">
-                  <date-part name="year"/>
                 </date>
-             </group>
-          </else>
 
+                <group prefix="[" suffix="]">
+                    <text term="accessed" suffix=" "/>
+                    <date variable="accessed">
+                    <date-part name="day" form="numeric" suffix="."/>
+                    <date-part name="month" form="numeric" suffix="."/>
+                    <date-part name="year"/>
+                    </date>
+                </group>
+                </group>
+
+                            <!-- URL, rendered only when present -->
+                <group delimiter=" ">
+                <text
+                    term="available at"
+                    text-case="capitalize-first"
+                    suffix=":"
+                />
+                <text variable="URL"/>
+                </group>
+            </group>
+            </else-if>
+
+                    <!-- Catch-all for types not defined above -->
+          <else>
+            <group delimiter=". ">
+              <text variable="title" font-style="italic"/>
+              <text macro="publisher"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </else>
         </choose>
 
-        <!-- Notes (like "Celia äänikirjapalvelu" or "Valitut muuttujat") -->
-        <text variable="note"/>
-        
-        <group delimiter=" ">
-          <text term="available at" text-case="capitalize-first" suffix=":"/>
-          <text variable="URL"/>
-        </group>
+                <!--
+          Render notes and URLs here only for non-digital source types.
+          Digital source types already render these fields in their branch.
+        -->
+        <choose>
+          <if
+            type="webpage post-weblog post software dataset motion_picture broadcast song speech personal_communication"
+            match="none"
+          >
+            <text variable="note"/>
+
+            <group delimiter=" ">
+              <text
+                term="available at"
+                text-case="capitalize-first"
+                suffix=":"
+              />
+              <text variable="URL"/>
+            </group>
+          </if>
+        </choose>
       </group>
     </layout>
   </bibliography>

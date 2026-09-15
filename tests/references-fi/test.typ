@@ -41,8 +41,11 @@ Henkilökohtainen tiedonanto @alasalmiEmail2018.
 Podcast @lundbergPodcast2023.
 Instagram-julkaisu @nasaInstagram2022.
 Peli @vollmerThrees2014.
-Verkkojulkaisu @vaswaniAttentionAllYou2023.
-Tilauspalvelun e-kirja @gutmanBecomingDataHead2021.
 Fallback @failsafeFallback.
+
+Omat lisäykset alkaa tästä. Verkkojulkaisu @vaswaniAttentionAllYou2023.
+Tilauspalvelun e-kirja @gutmanBecomingDataHead2021.
+Konferenssijulkaisu @NEURIPS2025_2b11f497.
+Normaali lehtiartikkeli @sievinenViisasVeijari2026.
 
 #template.render-bibliography(language: language, source: path("testreferences.bib"))
