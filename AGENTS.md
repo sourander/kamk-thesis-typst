@@ -1,46 +1,54 @@
 # AGENTS.md
 
-KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — the verification is that `just build` compiles without errors.
+KAMK (Kajaani UAS) thesis template in Typst. The reusable template library lives in `src/`; the sample thesis document lives in `template/`.
 
 ## Commands
 
-- `just build` (default) — compiles `template/thesis.typ` → `build/thesis.pdf`
-- `just watch` — live recompile on change
-- `just clean` — removes `build/`
-- `just thumbnail` — generates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI)
+Run from the repo root. Requires `just` and `typst` CLIs; `tt` (Tytanic) for `just test`; `uv` for the packaging and docs recipes; the Carlito font installed for matching output.
+
+- `just` — lists all recipes (default)
+- `just build` — one-shot compile of `template/thesis.typ` → `build/thesis.pdf`; temporarily installs the library as `@preview`, compiles, then uninstalls it
+- `just integration` — compiles `tests/frontmatter-fi-integration/test.typ` → `build/integration.pdf`
+- `just test [args]` — runs the Tytanic visual test suites (`tt run --use-system-fonts --no-fail-fast`)
+- `just test-scripts` — runs the Python unit tests for the packaging scripts (`uv run python -m unittest discover -s scripts/tests`)
+- `just thumbnail` — regenerates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI; must stay < 3 MB)
 - `just skim` — opens `build/thesis.pdf` in Skim (macOS only)
-- `just bump <X.Y.Z>` — updates the version in `typst.toml`, `template/thesis.typ` and `README.md`; run `just install-preview` afterwards
-- `just package <target>` — packages the library (files per `.typstignore`) into `<target>/<name>/<version>` via `scripts/package`
+- `just bump <X.Y.Z>` — updates the version in `typst.toml` and the `kamk-thesis:X.Y.Z` package references in `template/thesis.typ` and `README.md`; depends on `thumbnail`
+- `just setup <target>` — print the resolved packaging configuration
+- `just package <target>` — packages the library (files per `.typstignore`) into `<target>/<name>/<version>` via `scripts/install_typst_package.py`
 - `just install` / `just install-preview` — package into the `@local` / `@preview` Typst package dirs of the user's data dir
-- `just uninstall` / `just uninstall-preview` — remove the installed `<name>/<version>` from the `@local` / `@preview` dirs via `scripts/uninstall`
-- `just pysetup [target]` — print the resolved packaging configuration (install dir, package name, version, target)
-- `just pypackage <target>` / `just pyinstall` / `just pyinstall-preview` / `just pyuninstall` / `just pyuninstall-preview` — Python equivalents of the packaging recipes above, run via `uv`
-- Requires `just` and `typst` CLIs. Packaging recipes additionally require `bash` (original scripts) or `uv` with Python ≥3.13 (py scripts).
+- `just uninstall` / `just uninstall-preview` — remove the installed `<name>/<version>` from the `@local` / `@preview` dirs via `scripts/remove_typst_package.py`
+- `just docs` — serve the Zensical docs site locally (`uvx zensical serve`)
+- `template/Justfile` — a second Justfile for thesis authors working in `template/`: `just watch` (live recompile of `thesis.typ` on save) and `just draft` (one-off PDF/UA-1 build to `build/thesis-draft-YYYY-MM-DD.pdf`)
 
 ## Structure
 
-- `template/thesis.typ` — entry document: fills in `template.frontmatter.with(...)` (metadata, abstracts, keywords) and appends body chapters after it.
-- `src/` — the reusable template library, published eventually as `@preview/kamk-thesis:1.0.0` (see import comment in `template/thesis.typ`); until then it is imported by local relative path from `src/lib.typ`.
-  - `src/lib.typ` — public API: imports and re-exports `frontmatter`, `render-ai-usage`, `render-bibliography`, `render-appendices` from the subfolders below.
-  - `src/core/` — mechanics and visual identity, independent of thesis content: `config.typ` (page/text/heading defaults, extracted into `setup-document`/`setup-body-page`; sets the Carlito body font), `colors.typ` (KAMK brand colors), `utils.typ` (helpers like `format-authors`).
-  - `src/sections/` — structural building blocks, one file per chunk of the document: `frontmatter.typ` (orchestrates title page, abstracts, ToC, symbol list — the old `cover-to-symbols.typ`), `titlepage.typ`, `abstract.typ`, `ai-usage.typ`, `bibliography.typ`, `appendix.typ`.
+- `template/thesis.typ` — entry document: fills in `template.frontmatter.with(...)` (metadata, abstracts, keywords) and appends body chapters from `template/chapters/` and `template/appendices/` after it; imports the library as `@preview/kamk-thesis:<version>`.
+- `src/` — the reusable template library, published as `@preview/kamk-thesis` (version in `typst.toml`); entrypoint `src/lib.typ`.
+  - `src/lib.typ` — public API: imports and re-exports `frontmatter`, `render-foreword`, `render-ai-usage`, `render-bibliography`, `render-appendices` from the subfolders below.
+  - `src/core/` — mechanics and visual identity, independent of thesis content: `config.typ` (document setup split into `setup-document`, `setup-math`, `setup-headings`, `setup-code`, `setup-tables`, `setup-body-page`; sets the Carlito body font), `colors.typ` (KAMK brand colors), `utils.typ` (helpers like `format-authors`).
+  - `src/sections/` — structural building blocks, one file per chunk of the document: `frontmatter.typ` (orchestrates title page, abstracts, ToC, symbol list, foreword), `titlepage.typ`, `abstract.typ`, `foreword.typ`, `ai-usage.typ`, `bibliography.typ`, `appendix.typ`.
   - `src/data/` — non-Typst data files: `lang.toml` (fi/en UI labels) and `kamk-vancouver.csl` (citation style), read via relative paths (e.g. `"../data/lang.toml"`) from `src/sections/*.typ`.
-- Tip: the [typst-package-template](https://github.com/typst-community/typst-package-template) repo can be used as a reference for packaging layout (e.g. `typst.toml`, `CHANGELOG.md`, release workflow) when preparing `src/` for publication.
-- Rule of thumb: template/layout changes go in `src/`; thesis content and metadata go in `template/thesis.typ`.
-- `scripts/` — packaging tooling: the original shell scripts (`setup`, `package`, `uninstall`) and their cross-OS Python replacements (`typst_package_config.py`, `install_typst_package.py`, `remove_typst_package.py`). The Python scripts use PEP 723 inline metadata (no dependencies), have no shebangs, and are invoked as `uv run scripts/<name>.py`; `install_typst_package.py`/`remove_typst_package.py` import the shared `setup` module.
-- `.typstignore` — drives what the packagers include: one file (no subdirectory files), patterns match file/directory names from the beginning (`*` also matches `/`), last matching rule wins, and `!` rules re-include. `.git` and `.typstignore` are always excluded. Currently excludes e.g. `scripts`, `build`, `Justfile`, `AGENTS.md`.
+- `tests/` — Tytanic visual test suites: `frontmatter-fi-integration`, `references-fi`, `titlepage-fi`.
+- `docs/` — Zensical docs site (Finnish): `riippuvuudet/` (dependencies) and `syntaksi/` (syntax guides), configured by `zensical.toml` and `siteinfo.json`; built site output goes to the gitignored `site/`.
+- `scripts/` — packaging tooling in Python (PEP 723 inline metadata, no dependencies, no shebangs, invoked as `uv run scripts/<name>.py`): `typst_package_config.py` (shared configuration resolver), `install_typst_package.py` and `remove_typst_package.py` (both import the config module), plus unit tests in `scripts/tests/`.
+- `.github/workflows/` — `tests.yml` (script unit tests + Tytanic suites, archives the PNG outputs), `docs.yaml` (GitHub Pages deploy of the docs site), `release.yml` (on `v*` tags: builds the package via `just package out`, verifies and zips it as an artifact; the registry-publish job is currently commented out).
+- `.typstignore` — drives what the packager includes: one file (no subdirectory files), patterns match file/directory names from the beginning (`*` also matches `/`), last matching rule wins, and `!` rules re-include. `.git` and `.typstignore` are always excluded. Currently excludes e.g. `scripts`, `tests`, `docs`, `build`, `Justfile`, `AGENTS.md`.
+- Tip: the [typst-package-template](https://github.com/typst-community/typst-package-template) repo can be used as a reference for packaging layout (e.g. `typst.toml`, `CHANGELOG.md`, release workflow) when preparing the package for publication.
+- Rule of thumb: template/layout changes go in `src/`; thesis content and metadata go in `template/`.
 
 ## Verification
 
-- The only automated check is that `just build` compiles without errors. Run it to verify changes.
+- `just build` must compile without errors — run it to verify changes.
+- Tests are run with Tytanic (`just test`) from `tests/**/test.typ` files. Each test has `diff`, `out` and `ref` directories for the PNG images used for comparison.
 - Do NOT do any visual or rendered-output inspection. Specifically, do not render the PDF and view it, do not render PNG/PDF pages to images and analyze them, and do not attempt any visual diffing or screenshot-based checks. These pipelines are wasteful and out of scope for an agent.
 - Visual inspection of the output is a human responsibility. Leave it to the user.
-- Testing is done using Tytanic (Typst's own test runner) and `tests/**/test.typ` files. Each test has `diff`, `out` and `ref` directories for storing PNG images used for comparison. Do not attempt to compare them visually; human and/or the test does this.
 
 ## Gotchas
 
-- `assets/` has a gitignored KAMK logo (pending marketing approval). This ignore rule will be removed once the logo is chosen and approved.
+- `assets/` has a gitignored KAMK logo (pending marketing approval). The ignore block in `.gitignore` (and the `.typstignore` entry) will be removed once the logo is chosen and approved; builds currently go around it with `assets/logo_temporary.svg`.
 - Content parameters come in `fi`/`en` pairs (title, degree, programme, keywords, abstract); the `language` param selects which labels are used for the title page, ToC, and symbol list. Adding a language means a new `src/data/lang.toml` section plus wiring in `src/sections/frontmatter.typ`.
 - The body text uses the Carlito font (set in `src/core/config.typ`); users need it installed to match KAMK's look.
-- The README also still shows an older `#import "../src/lib.typ": template` / `template.with(...)` usage snippet; the actual exported entry point is `template.frontmatter.with(...)` (see `template/thesis.typ` for the working example). This drift predates the `core`/`sections`/`data` split and hasn't been fixed yet.
-- The original `scripts/package` uses bash-4+ features (`readarray`) and fails on macOS's default bash 3.2; the `py`-prefixed recipes are the portable alternative. Both packagers write to `<target>/<name>/<version>` (from `typst.toml`) and overwrite an existing same-version install.
+- `just bump` does not update the README's `Version X.Y.Z` heading — its regex expects an HTML-escaped `&gt;Version` label, which the README no longer uses. It only updates `typst.toml` and the `kamk-thesis:X.Y.Z` package references.
+- The README instructs users to run `just preview`, which does not exist in the root Justfile; the author-facing live preview is `just watch` in `template/Justfile`. Known drift.
+- Package scripts write to `<target>/<name>/<version>` (name/version from `typst.toml`) and overwrite an existing same-version install.
