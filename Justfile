@@ -23,7 +23,7 @@ build:
 # Build the testes/frontmatter-fi-integration/test.typ to build/integration.pdf
 integration:
     mkdir -p {{OUT_DIR}}
-    typst compile --root . tests/frontmatter-fi-integration/test.typ {{OUT_DIR}}/integration.pdf
+    typst compile --root . --pdf-standard ua-1 tests/frontmatter-fi-integration/test.typ {{OUT_DIR}}/integration.pdf
     @echo "Integration test build successful: {{OUT_DIR}}/integration.pdf"
 
 # Generate the template thumbnail required for package submission

@@ -82,7 +82,7 @@
 
 #lorem(50)
 
-Inline-matematiikka toimii ilman erillistä numerointia: $a^2 + b^2 = c^2$. Lohkotason yhtälö saa juoksevan numeron sulkeissa (ks. @math-fi-quadratic, aivan oikea laita sivua).
+Inline-matematiikka toimii ilman erillistä numerointia: #math.equation($a^2 + b^2 = c^2$, alt: "a toiseen plus b toiseen on yhtä kuin c toiseen"). Lohkotason yhtälö saa juoksevan numeron sulkeissa (ks. @math-fi-quadratic, aivan oikea laita sivua).
 
 #math.equation(
   alt: "x on yhtä kuin miinus b plus tai miinus neliöjuuri b toiseen

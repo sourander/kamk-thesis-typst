@@ -4,7 +4,20 @@ Typstillä on sisäänrakennettu matematiikkatila, eikä `kamk-thesis`-mallipohj
 
 ## Inline-matematiikka
 
-Lyhyt, tekstin sisään upotettu matematiikka kirjoitetaan `$`-merkkien väliin ilman ylimääräisiä välilyöntejä lausekkeen ja `$`-merkkien välissä. Tämä ei saa numeroa, eikä sitä ole tarkoituskaan numeroida. `kamk-thesis`-mallipohja ei tuo tähän mitään lisäyksiä, vaan Typstin oma syntaksi toimii sellaisenaan:
+Lyhyt, tekstin sisään upotettu matematiikka kirjoitetaan `#math.equation()`-lausekkeena. Tästä ei synny omaa matematiikkalohkoa, joten se ei myöskään saa numeroa. Siihen ei voi siis viitata muualta. Huomaa, että alt-teksti on pakollinen PDF/A UA-1 vaatimusten takia! Työstät siis seuraavanlaisen syntaksin:
+
+```typst
+#math.equation(
+    $a^2 + b^2 = c^2$,
+    alt: "a toiseen plus b toiseen on yhtä kuin c toiseen"
+)
+```
+
+Tätä ei käytetän sinällään, vaan inline eli tekstin sisään upotettuna. Esimerkki, jossa esimerkkiä varten funktiokutsun sisältö on piilotettu tai tiivistetty `...`-muotoon on seuraaava:
+
+```typst
+Jotain tekstiä jotain tekstiä #math.equation(...) jotain tekstiä.
+```
 
 ## Numeroitu yhtälö
 
@@ -19,8 +32,10 @@ Kun yhtälö kirjoitetaan omaksi lohkokseen, Typst asettaa sen omalle rivilleen 
 ) <yhtalo-toisen-asteen>
 ```
 
+Numero näkyy sulkeissa rivin oikeassa reunassa, esim. **(1)**. Numerointi on globaali koko dokumentin läpi; se ei nollaudu lukujen väliin. Alt-teksti kuvaa kaavan luonnollisella kielellä, ikään kuin lukisit sen ääneen.
+
 !!! warning
 
     Kun opinnäytetyö viedään PDF/A- tai PDF/UA-muotoon, jokaiselle lohkotason yhtälölle **on annettava alt-teksti**. Ilman sitä vienti epäonnistuu etkä voi palauttaa työtä Theseukseen. Tämän takia sinun tulee käyttää tätä pidempää `math.equation()`-syntaksia. Näet Typstin dokumentaatiossa myös lyhyemmän syntaksin, mutta älä käytä sitä. Se ei mahdollista alt-tekstin asettamista.
 
-Numero näkyy sulkeissa rivin oikeassa reunassa, esim. **(1)**. Numerointi on globaali koko dokumentin läpi; se ei nollaudu lukujen väliin. Alt-teksti kuvaa kaavan luonnollisella kielellä, ikään kuin lukisit sen ääneen.
+    Tämä pätee niin lyhyeen (inline) kuin pidempään (lohko) yhtälöönkin.
