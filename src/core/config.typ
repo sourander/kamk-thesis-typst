@@ -121,19 +121,39 @@
   body
 }
 
+/*
+  Table figure defaults.
+
+  - Places table captions above the table
+  - Applies only to figures whose kind is `table`
+  - Does not affect image or raw/code figures
+*/
+#let setup-tables(language: "fi", body) = {
+  // Place captions above table figures.
+  show figure.where(kind: table): set figure.caption(position: top)
+
+  // Render the first row of every table in bold. 
+  // Can be overridden by the user with: set text(weight: "regular")
+  show table.cell.where(y: 0): set text(weight: "bold")
+
+  body
+}
 
 /*
-  Page/heading defaults for everything after the (zero-margin) title page.
-  Takes `body` for the same set-rule-scoping reason as setup-document.
+  Page and body-content defaults for everything after the zero-margin title page.
+  Takes `body` so that page settings and set/show rules remain in scope for the
+  document body.
 
-  - Sets A4 page geometry and KAMK margins
-  - Sets heading spacing for all headings
-  - Sets H1 headings to have a page break before them and a gap above them
-  - Sets a one-line empty gap between body text paragraphs
-  - Resets heading text to non-bold 11pt (overrides the Typst default heading style)
-  - Applies the parenthesized equation numbering from setup-math
-  - Applies the localized chapter/heading reference supplement from setup-headings
-  */
+  - Sets the A4 page size and KAMK margins
+  - Configures spacing above and below all headings
+  - Starts each level-one heading on a new page
+  - Sets spacing between body paragraphs
+  - Overrides Typst's default heading style with regular-weight 11 pt text
+  - Applies localized heading-reference supplements through setup-headings
+  - Applies equation numbering and localized supplements through setup-math
+  - Places table captions above tables through setup-tables
+  - Applies code-block and code-figure styling through setup-code
+*/
 #let setup-body-page(language: "fi", body) = {
   set page(
     paper: "a4",
@@ -152,6 +172,7 @@
   // Cleanly apply all wrappers without nested parentheses
   show: setup-headings.with(language: language)
   show: setup-math.with(language: language)
+  show: setup-tables.with(language: language)
   show: setup-code.with(language: language)
 
   body

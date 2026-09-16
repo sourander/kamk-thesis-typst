@@ -35,12 +35,12 @@ KAMK (Kajaani UAS) thesis template in Typst. No test or lint infrastructure — 
 - The only automated check is that `just build` compiles without errors. Run it to verify changes.
 - Do NOT do any visual or rendered-output inspection. Specifically, do not render the PDF and view it, do not render PNG/PDF pages to images and analyze them, and do not attempt any visual diffing or screenshot-based checks. These pipelines are wasteful and out of scope for an agent.
 - Visual inspection of the output is a human responsibility. Leave it to the user.
-- Testing via the Tytanic library will be introduced later; until then, verification is manual (human inspection) plus successful compilation.
+- Testing is done using Tytanic (Typst's own test runner) and `tests/**/test.typ` files. Each test has `diff`, `out` and `ref` directories for storing PNG images used for comparison. Do not attempt to compare them visually; human and/or the test does this.
 
 ## Gotchas
 
-- `assets/` is fully gitignored (pending marketing approval), yet `src/sections/titlepage.typ` references `assets/cover_image.jpg` and `assets/KAMK_english_white_copyrighted.svg` (via `../../assets/...`, since `sections/` is nested one level deeper than the old flat `src/`). A fresh clone will fail to compile until those files exist locally.
+- `assets/` has a gitignored KAMK logo (pending marketing approval). This ignore rule will be removed once the logo is chosen and approved.
 - Content parameters come in `fi`/`en` pairs (title, degree, programme, keywords, abstract); the `language` param selects which labels are used for the title page, ToC, and symbol list. Adding a language means a new `src/data/lang.toml` section plus wiring in `src/sections/frontmatter.typ`.
-- The body text uses the Carlito font (set in `src/core/config.typ`); users need it installed to match KAMK's look. The README currently has no font-install guide for Windows. Using Calibri as fallback is being considered, but not decided.
+- The body text uses the Carlito font (set in `src/core/config.typ`); users need it installed to match KAMK's look.
 - The README also still shows an older `#import "../src/lib.typ": template` / `template.with(...)` usage snippet; the actual exported entry point is `template.frontmatter.with(...)` (see `template/thesis.typ` for the working example). This drift predates the `core`/`sections`/`data` split and hasn't been fixed yet.
 - The original `scripts/package` uses bash-4+ features (`readarray`) and fails on macOS's default bash 3.2; the `py`-prefixed recipes are the portable alternative. Both packagers write to `<target>/<name>/<version>` (from `typst.toml`) and overwrite an existing same-version install.

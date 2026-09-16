@@ -783,7 +783,7 @@ Ei ole kummallinen tämä lähde. Kyseessä on aivan tavallisen painetun lehden,
 
 Lähdeluettelossa se näyttää tältä:
 
-![](../images/23_article.png)
+![](../images/23_lehti.png)
 
 ??? info "BibLaTeX entry"
 

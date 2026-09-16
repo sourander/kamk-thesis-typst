@@ -20,6 +20,12 @@ build:
     just uninstall-preview
     @echo "Build successful: {{OUT_FILE}}"
 
+# Build the testes/frontmatter-fi-integration/test.typ to build/integration.pdf
+integration:
+    mkdir -p {{OUT_DIR}}
+    typst compile --root . tests/frontmatter-fi-integration/test.typ {{OUT_DIR}}/integration.pdf
+    @echo "Integration test build successful: {{OUT_DIR}}/integration.pdf"
+
 # Generate the template thumbnail required for package submission
 thumbnail: install-preview
     typst compile --root . -f png --pages 1 --ppi 150 {{ENTRY_FILE}} {{THUMBNAIL_FILE}}
@@ -43,10 +49,6 @@ test *args:
 # Run the Python unit tests for the packaging scripts
 test-scripts:
     uv run python -m unittest discover -s scripts/tests
-
-# Update test cases using Tytanic
-update *args:
-    tt update {{args}}
 
 # Bump the package version in typst.toml, template/thesis.typ and README.md.
 bump version: && thumbnail
