@@ -3,4 +3,3 @@
 #import "sections/ai-usage.typ": render-ai-usage
 #import "sections/bibliography.typ": render-bibliography
 #import "sections/appendix.typ": render-appendices
-#import "core/config.typ": code-block

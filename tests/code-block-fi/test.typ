@@ -1,4 +1,4 @@
-#import "/src/core/config.typ": setup-document, setup-body-page, code-block
+#import "/src/core/config.typ": setup-document, setup-body-page
 
 #let language = "fi"
 
@@ -14,34 +14,36 @@
 
 = Testiluvun otsikko
 
-Lyhyt koodilohko ei saa rivinumeroita eikä kuvatekstiä. Katso esimerkki alta (ks. @code-block-fi-summa).
+Lyhyt koodilohko ei saa rivinumeroita eikä kuvatekstiä. Katso esimerkki alta (ks. @code-block-fi-summa). 
 
-#code-block(
-  language: language,
+// Notice how referencable short blocks are wrapped in an empty figure
+#figure()[
   ```python
   def summa(a, b):
       return a + b
   ```
-) <code-block-fi-summa>
+] <code-block-fi-summa>
 
 Pitkä (vähintään 10 rivin) koodilohko saa rivinumerot ja vaatii kuvatekstin:
 
-#code-block(
-  caption: [Fibonaccin luvun laskeminen iteratiivisesti.],
-  language: language,
+#figure(
+caption: [Fibonaccin luvun laskeminen iteratiivisesti.],
+)[
   ```python
   def fibonacci(n):
-      if n <= 1:
-          return n
-
-      previous, current = 0, 1
-      for _ in range(2, n + 1):
-          previous, current = current, previous + current
-
-      return current
-
-  print(fibonacci(10))
+      if n <= 0:
+          return []
+      elif n == 1:
+          return [0]
+      elif n == 2:
+          return [0, 1]
+      else:
+          fib = [0, 1]
+          for i in range(2, n):
+              next_fib = fib[i - 1] + fib[i - 2]
+              fib.append(next_fib)
+          return fib
   ```
-) <code-block-fi-fibonacci>
+] <code-block-fi-fibonacci>
 
 Pitkään koodilohkoon voi viitata, esim. @code-block-fi-fibonacci.

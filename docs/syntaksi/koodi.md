@@ -1,27 +1,39 @@
 # Koodi
 
-`kamk-thesis`-mallipohja tuo koodilohkoille oman `code-block()`-funktion, joka valitsee ulkoasun automaattisesti lohkon pituuden perusteella. Kaikki koodilohkot saavat vaaleanharmaan taustan ja ovat leveydeltään yhtä leveitä kuin muu leipäteksti (marginaalien sisäpuolinen leveys).
+`kamk-thesis`-mallipohja muotoilee koodilohkot automaattisesti lohkon pituuden perusteella. Erillisiä apufunktioita ei tarvita, vaan voit käyttää Typstin vakio-ominaisuuksia (markdown-tyylisiä koodilohkoja ja `figure`-komentoa). Kaikki koodilohkot saavat vaaleanharmaan taustan ja ovat leveydeltään yhtä leveitä kuin muu leipäteksti.
 
 ## Lyhyt koodilohko
 
-Alle 10 rivin koodilohko ei saa rivinumeroita eikä kuvatekstiä (`caption`). Sillä on kuitenkin juokseva numero, joka näytetään suluissa (esim. `(2)`) lohkon oikeassa laidassa, samaan tapaan kuin (matematiikka)kaavoilla (ks. [Matikka](matikka.md)):
+Alle 10 rivin koodilohko ei saa rivinumeroita eikä kuvatekstiä (`caption`). Sillä on kuitenkin juokseva numero, joka näytetään suluissa (esim. `(2)`) lohkon oikeassa laidassa, samaan tapaan kuin kaavoilla.
+
+Jos et tarvitse lohkolle viitettä (label), voit vain kirjoittaa koodin suoraan:
 
 ```typst
-#code-block(
+```python
+def summa(a, b):
+    return a + b
+```
+```
+
+Jos haluat pystyä viittaamaan lohkoon tekstissä (esim. `@summa`), kääri se tyhjään `figure`-komentoon ja anna sille tunniste:
+
+```typst
+#figure()[
   ```python
   def summa(a, b):
       return a + b
   ```
-)
+] <summa>
 ```
 
 ## Pitkä koodilohko
 
-Vähintään 10 rivin koodilohko saa juoksevat rivinumerot ja *vaatii* kuvatekstin:
+Vähintään 10 rivin koodilohko saa automaattisesti juoksevat rivinumerot ja *vaatii* aina kuvatekstin. Se on käärittävä `figure`-komennon sisään:
 
 ```typst
-#code-block(
+#figure(
   caption: [Fibonaccin luvun laskeminen iteratiivisesti.],
+)[
   ```python
   def fibonacci(n):
       if n <= 1:
@@ -35,14 +47,14 @@ Vähintään 10 rivin koodilohko saa juoksevat rivinumerot ja *vaatii* kuvatekst
 
   print(fibonacci(10))
   ```
-) <fibonacci>
+] <fibonacci>
 ```
 
-Pitkät ja lyhyet koodilohkot jakavat saman juoksevan numeroinnin: pitkä lohko näyttää numeronsa kuvatekstinä (esim. **Koodi 1**), kun taas lyhyt lohko näyttää oman numeronsa suluissa (esim. `(2)`) lohkon oikeassa yläkulmassa eikä sitä luetella kuvien luettelossa. Numerointi on globaali koko dokumentin läpi eikä nollaudu lukujen väliin. Koodilohkoon voi viitata label-viittauksella, esim. `@fibonacci`.
+Pitkät ja lyhyet koodilohkot jakavat saman juoksevan numeroinnin: pitkä lohko näyttää numeronsa kuvatekstinä (esim. **Koodi 1**), kun taas lyhyt lohko näyttää oman numeronsa suluissa (esim. `(2)`) lohkon oikeassa reunassa, eikä sitä luetella kuvien luettelossa. Numerointi on globaali koko dokumentin läpi eikä nollaudu lukujen väliin. Koodilohkoon voi viitata label-viittauksella, esim. `@fibonacci`.
 
 ## Kummankin lohkotyypin yhteiset piirteet
 
-- Vaaleanharmaa tausta (määritelty `kamk-gray`-värinä `src/core/colors.typ`-tiedostossa).
+- Vaaleanharmaa tausta (määritelty `code-block-bg`-värinä `src/core/colors.typ`-tiedostossa).
 - Täysi tekstin leveys.
 - Syntaksiväritys `lang`-tunnisteen (esim. `python`) mukaan, Typstin oman `raw`-elementin kautta.
-- Valinnainen `alt`-teksti saavutettavuutta varten.
+- Valinnainen `alt`-teksti saavutettavuutta varten (voidaan antaa `figure(alt: "kuvaus")` -parametrina).

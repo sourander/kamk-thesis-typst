@@ -1,5 +1,7 @@
 #import "colors.typ": code-block-bg
 
+#let lang-data = toml("../data/lang.toml")
+
 // Document-wide defaults: metadata, base text/paragraph style. Applied once, at the very start.
 // Takes `body` so the set/show rules stay in scope for the rest of the document, since Typst
 // scopes them to the block they're defined in rather than leaking into the caller.
@@ -40,6 +42,86 @@
   body
 }
 
+
+/*
+  Automatically styles all code listings using standard Markdown syntax.
+  - Short (< 10 lines): Rendered automatically with a side-counter (1).
+  - Long (>= 10 lines): Renders with line numbers. Requires user to wrap it in a #figure().
+*/
+#let short-code-counter = counter("short-code")
+#let setup-code(language: "fi", body) = {
+  // 1. Set supplements globally for code figures
+  show figure.where(kind: raw): set figure(supplement: lang-data.at(language).code)
+
+  // 2. Style the raw block itself (background, padding, line numbers)
+  show raw.where(block: true): it => {
+    let is-long = it.text.split("\n").len() >= 10
+    
+    let styled = {
+      set text(size: 10pt)
+      set par(leading: 0.75em)
+      show raw.line: line => {
+        if is-long {
+          box(width: 1.25em)[#align(right, text(size: 10pt, fill: gray, str(line.number)))] + h(1.5em) + line.body
+        } else {
+          line
+        }
+      }
+      it
+    }
+
+    block(
+      width: 100%,
+      fill: code-block-bg,
+      inset: 1em,
+      radius: 4pt,
+      breakable: true,
+    )[#align(left)[#styled]]
+  }
+
+  // 3. Handle the Figure Layout (Short vs Long)
+// 3. Handle the Figure Layout (Short vs Long)
+  show figure.where(kind: raw): it => {
+    // Safely extract the raw element, even if the user wrapped it in square brackets
+    let raw-elem = it.body
+    if raw-elem.func() != raw and raw-elem.has("children") {
+      let found = raw-elem.children.find(e => e.func() == raw)
+      if found != none {
+        raw-elem = found
+      }
+    }
+
+    // Determine line count safely
+    let is-long = false
+    if raw-elem != none and raw-elem.has("text") {
+      is-long = raw-elem.text.split("\n").len() >= 10
+    }
+
+    if is-long {
+      assert(
+        it.caption != none,
+        message: ">= 10 rivin koodilohko vaatii kuvatekstin (caption)."
+      )
+      // Long block: standard figure layout (caption below)
+      it
+    } else {
+      // Short block layout: We intercept the figure and draw a custom grid.
+      block(width: 100%)[
+        #grid(
+          columns: (1fr, auto),
+          column-gutter: 1em,
+          align: (left, right + horizon),
+          it.body,
+          context counter(figure.where(kind: raw)).display("(1)")
+        )
+      ]
+    }
+  }
+
+  body
+}
+
+
 /*
   Page/heading defaults for everything after the (zero-margin) title page.
   Takes `body` for the same set-rule-scoping reason as setup-document.
@@ -57,6 +139,7 @@
     paper: "a4",
     margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm)
   )
+  
   show heading: set block(above: 3.0em, below: 2.0em)
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
@@ -65,111 +148,11 @@
 
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
-  setup-headings(language: language, setup-math(language: language, body))
-}
+  
+  // Cleanly apply all wrappers without nested parentheses
+  show: setup-headings.with(language: language)
+  show: setup-math.with(language: language)
+  show: setup-code.with(language: language)
 
-/*
-  Renders a code listing as a figure, with automatic short/long-form behaviour
-  based on line count:
-
-  - Short (< 10 lines): no line numbers, no caption.
-  - Long (>= 10 lines): line numbers, caption is required.
-
-  Both forms get a light-grey, full-text-width background. An `alt`
-  description is accepted but optional.
-
-  Short blocks use a dedicated, un-numbered figure kind so they don't consume
-  a slot in the long-block numbering sequence (which would otherwise leave
-  gaps in the visible "Koodi N" / "Code N" captions).
-
-  `code` must be a raw element (i.e. a fenced ```lang ... ``` block), since its
-  `.text` field is inspected to count lines automatically.
-*/
-#let code-block(
-  alt: none,
-  caption: none,
-  language: "fi",
-  code,
-) = {
-  let lang-data = toml("../data/lang.toml")
-
-  let is-long = code.text.split("\n").len() >= 10
-
-  if is-long {
-    assert(
-      caption != none,
-      message: "code-block: >= 10 rivin koodilohko vaatii kuvatekstin (caption).",
-    )
-  }
-
-let styled-code = {
-  // Set the code font and size.
-  show raw.where(block: true): set text(
-    // font: "DejaVu Sans Mono",
-    size: 10pt,
-  )
-
-  // Control the line spacing within a code block.
-  show raw.where(block: true): set par(leading: 0.75em)
-
-  show raw.line: line => {
-    if is-long {
-      box(width: 1.25em)[
-        #align(
-          right,
-          text(
-            // font: "DejaVu Sans Mono",
-            size: 10pt,
-            fill: gray,
-            str(line.number),
-          ),
-        )
-      ] + h(1.5em) + line.body
-    } else {
-      line
-    }
-  }
-
-  block(
-    width: 100%,
-    fill: code-block-bg,
-    inset: 1em,
-    radius: 4pt,
-    breakable: true,
-  )[
-    #align(left)[
-      #code
-    ]
-  ]
-}
-
-  if is-long {
-    figure(
-      styled-code,
-      caption: caption,
-      alt: alt,
-      kind: raw,
-      supplement: lang-data.at(language).code,
-      numbering: "1",
-    )
-  } else {
-    figure(
-      block(width: 100%)[
-        #grid(
-          columns: (1fr, auto),
-          column-gutter: 1em,
-          align: (left, right + horizon),
-          styled-code,
-          context counter(
-            figure.where(kind: raw)
-          ).display("(1)"),
-        )
-      ],
-      alt: alt,
-      kind: raw,
-      supplement: lang-data.at(language).code,
-      numbering: "1",
-      outlined: false,
-    )
-  }
+  body
 }
