@@ -28,6 +28,13 @@ exclude = [
     ".typstignore",
     "AGENTS.md",
     "Justfile",
+    ".gitignore",
+    "CONTRIBUTE.md",
+    "site",
+    "siteinfo.json",
+    "zensical.toml",
+    ".cache",
+    ".DS_Store",
     "assets/KAMK_english_white_copyrighted.svg",
 ]
 

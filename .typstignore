@@ -7,8 +7,17 @@
 # - `*` in patterns works, but also matches directory separators: `*.typ` _will_ match `src/x.typ`
 # .git and .typstignore are excluded automatically
 .github
+.gitignore
 scripts
 tests
 build
+docs
 Justfile
 AGENTS.md
+CONTRIBUTE.md
+site
+siteinfo.json
+zensical.toml
+.cache
+*.DS_Store
+assets/KAMK_english_white_copyrighted.svg
