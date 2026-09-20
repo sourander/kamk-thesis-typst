@@ -8,29 +8,29 @@ Alle 10 rivin koodilohko ei saa rivinumeroita eikä kuvatekstiä (`caption`). Si
 
 Jos et tarvitse lohkolle viitettä (label), voit vain kirjoittaa koodin suoraan:
 
-```typst
+````typst
 ```python
 def summa(a, b):
     return a + b
 ```
-```
+````
 
 Jos haluat pystyä viittaamaan lohkoon tekstissä (esim. `@summa`), kääri se tyhjään `figure`-komentoon ja anna sille tunniste:
 
-```typst
+````typst
 #figure()[
   ```python
   def summa(a, b):
       return a + b
   ```
 ] <summa>
-```
+````
 
 ## Pitkä koodilohko
 
 Vähintään 10 rivin koodilohko saa automaattisesti juoksevat rivinumerot ja *vaatii* aina kuvatekstin. Se on käärittävä `figure`-komennon sisään:
 
-```typst
+````typst
 #figure(
   caption: [Fibonaccin luvun laskeminen iteratiivisesti.],
 )[
@@ -48,13 +48,11 @@ Vähintään 10 rivin koodilohko saa automaattisesti juoksevat rivinumerot ja *v
   print(fibonacci(10))
   ```
 ] <fibonacci>
-```
+````
 
 Pitkät ja lyhyet koodilohkot jakavat saman juoksevan numeroinnin: pitkä lohko näyttää numeronsa kuvatekstinä (esim. **Koodi 1**), kun taas lyhyt lohko näyttää oman numeronsa suluissa (esim. `(2)`) lohkon oikeassa reunassa, eikä sitä luetella kuvien luettelossa. Numerointi on globaali koko dokumentin läpi eikä nollaudu lukujen väliin. Koodilohkoon voi viitata label-viittauksella, esim. `@fibonacci`.
 
 ## Kummankin lohkotyypin yhteiset piirteet
 
-- Vaaleanharmaa tausta (määritelty `code-block-bg`-värinä `src/core/colors.typ`-tiedostossa).
-- Täysi tekstin leveys.
+- Vaaleanharmaa tausta.
 - Syntaksiväritys `lang`-tunnisteen (esim. `python`) mukaan, Typstin oman `raw`-elementin kautta.
-- Valinnainen `alt`-teksti saavutettavuutta varten (voidaan antaa `figure(alt: "kuvaus")` -parametrina).

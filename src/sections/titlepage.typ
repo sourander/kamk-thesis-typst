@@ -57,7 +57,7 @@
         ]))
         
         #place(bottom + left, dx: 0.5cm, dy: -1.5cm, 
-          image("../../assets/logo_temporary.svg", width: 85%, alt: "Kajaani University of Applied Sciences logo")
+          image("../../assets/KAMK_white_copyrighted.svg", width: 85%, alt: "Kajaani University of Applied Sciences logo")
         )
       ]
     )

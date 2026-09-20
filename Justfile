@@ -20,10 +20,10 @@ build:
     just uninstall-preview
     @echo "Build successful: {{OUT_FILE}}"
 
-# Build the testes/frontmatter-fi-integration/test.typ to build/integration.pdf
+# Build the testes/end-to-end-fi/test.typ to build/integration.pdf
 integration:
     mkdir -p {{OUT_DIR}}
-    typst compile --root . --pdf-standard ua-1 tests/frontmatter-fi-integration/test.typ {{OUT_DIR}}/integration.pdf
+    typst compile --root . --pdf-standard ua-1 tests/end-to-end-fi/test.typ {{OUT_DIR}}/integration.pdf
     @echo "Integration test build successful: {{OUT_DIR}}/integration.pdf"
 
 # Generate the template thumbnail required for package submission

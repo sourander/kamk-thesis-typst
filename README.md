@@ -50,29 +50,7 @@ See the Zesical-generated documentation at [https://sourander.github.io/kamk-the
 
 ## Font installation
 
-The template uses the **Carlito** font for body text. It ships with Windows as a fallback for the proprietary Calibri, but Linux and macOS users need to install it to match KAMK's look.
-
-### On Ubuntu
-
-Follow these steps to install Carlito on Ubuntu:
-
-1. Open your Terminal (`Ctrl` + `Alt` + `T`).
-2. Update your package list and install the font by running:
-   ```bash
-   sudo apt update && sudo apt install fonts-crosextra-carlito
-    ```
-3. Update the font cache by running:
-   ```bash
-   fc-cache -f -v
-   ```
-
-### On macOS
-
-Follow these steps to install Carlito on macOS:
-
-```bash
-brew install --cask font-carlito
-``` 
+The template uses the **Carlito** font for body text. Installation is guide at the [Zensical docs site](https://sourander.github.io/kamk-thesis-typst/riippuvuudet/). Compilation will fail without the font installed.
 
 ## Usage
 
@@ -90,4 +68,5 @@ For contributing, see [`CONTRIBUTE.md`](CONTRIBUTE.md) for instructions on how t
 
 - Heavily inspired by the [WUT diploma thesis template](https://github.com/fuine/wut-thesis-typst) by Warsaw University of Technology in how the files are organized and named.
 - Source code released under the [MIT No Attribution License](LICENSE).
-- IMPORTANT! The project contains KAMK logo and design choices that are the property of Kajaani University of Applied Sciences Oy. If you were to modify this template for other University's thesis, remove KAMK logo and redesign title page.
+- IMPORTANT! The project contains KAMK logo and design choices that are the property of Kajaani University of Applied Sciences Oy.
+

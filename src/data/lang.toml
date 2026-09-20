@@ -21,6 +21,7 @@ appendix = "Liite"
 equation = "Kaava"
 chapter = "Luku"
 code = "Koodi"
+cover_image_source_heading = "Kansikuvan lähde"
 
 [en]
 university = "Kajaani University of Applied Sciences"
@@ -45,3 +46,4 @@ appendix = "Appendix"
 equation = "Equation"
 chapter = "Chapter"
 code = "Code"
+cover_image_source_heading = "Cover image source"

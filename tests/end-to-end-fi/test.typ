@@ -273,7 +273,14 @@ Sisältö, joka tavallisesti tuotaisiin chapters/-hakemistosta, loppuu tähän.
   ],
 )
 
-#template.render-bibliography(language: language, source: path("test-references.bib"))
+// Bibliography and appendices are rendered by the template.
+#template.render-bibliography(
+  language: language,
+  source: path("test-references.bib"),
+  cover_image_source: [
+    Jani Sourander. _Cover image placeholder_. Public Domain. URL: https://github.com/sourander/kamk-thesis-typst/blob/main/assets/cover_image.svg
+  ],
+)
 
 // Arabic page numbers stop here; appendix pages carry their own "Liite N i/total" numbering.
 #set page(numbering: none)

@@ -1,6 +1,8 @@
 nav:
+  - kansikuva.md
   - label.md
   - matikka.md
+  - koodi.md
   - lahdeluettelo.md
   - viitteet.md
   - taulukko.md

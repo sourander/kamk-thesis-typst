@@ -8,7 +8,7 @@ Run from the repo root. Requires `just` and `typst` CLIs; `tt` (Tytanic) for `ju
 
 - `just` — lists all recipes (default)
 - `just build` — one-shot compile of `template/thesis.typ` → `build/thesis.pdf`; temporarily installs the library as `@preview`, compiles, then uninstalls it
-- `just integration` — compiles `tests/frontmatter-fi-integration/test.typ` → `build/integration.pdf`
+- `just integration` — compiles `tests/end-to-end-fi/test.typ` → `build/integration.pdf`
 - `just test [args]` — runs the Tytanic visual test suites (`tt run --use-system-fonts --no-fail-fast`)
 - `just test-scripts` — runs the Python unit tests for the packaging scripts (`uv run python -m unittest discover -s scripts/tests`)
 - `just thumbnail` — regenerates `thumbnail.png` (package submission thumbnail, page 1 at 150 PPI; must stay < 3 MB)
@@ -29,7 +29,7 @@ Run from the repo root. Requires `just` and `typst` CLIs; `tt` (Tytanic) for `ju
   - `src/core/` — mechanics and visual identity, independent of thesis content: `config.typ` (document setup split into `setup-document`, `setup-math`, `setup-headings`, `setup-code`, `setup-tables`, `setup-body-page`; sets the Carlito body font), `colors.typ` (KAMK brand colors), `utils.typ` (helpers like `format-authors`).
   - `src/sections/` — structural building blocks, one file per chunk of the document: `frontmatter.typ` (orchestrates title page, abstracts, ToC, symbol list, foreword), `titlepage.typ`, `abstract.typ`, `foreword.typ`, `ai-usage.typ`, `bibliography.typ`, `appendix.typ`.
   - `src/data/` — non-Typst data files: `lang.toml` (fi/en UI labels) and `kamk-vancouver.csl` (citation style), read via relative paths (e.g. `"../data/lang.toml"`) from `src/sections/*.typ`.
-- `tests/` — Tytanic visual test suites: `frontmatter-fi-integration`, `references-fi`, `titlepage-fi`.
+- `tests/` — Tytanic visual test suites: `end-to-end-fi`, `references-fi`, `titlepage-fi`.
 - `docs/` — Zensical docs site (Finnish): `riippuvuudet/` (dependencies) and `syntaksi/` (syntax guides), configured by `zensical.toml` and `siteinfo.json`; built site output goes to the gitignored `site/`.
 - `scripts/` — packaging tooling in Python (PEP 723 inline metadata, no dependencies, no shebangs, invoked as `uv run scripts/<name>.py`): `typst_package_config.py` (shared configuration resolver), `install_typst_package.py` and `remove_typst_package.py` (both import the config module), plus unit tests in `scripts/tests/`.
 - `.github/workflows/` — `tests.yml` (script unit tests + Tytanic suites, archives the PNG outputs), `docs.yaml` (GitHub Pages deploy of the docs site), `release.yml` (on `v*` tags: builds the package via `just package out`, verifies and zips it as an artifact; the registry-publish job is currently commented out).
@@ -46,7 +46,6 @@ Run from the repo root. Requires `just` and `typst` CLIs; `tt` (Tytanic) for `ju
 
 ## Gotchas
 
-- `assets/` has a gitignored KAMK logo (pending marketing approval). The ignore block in `.gitignore` (and the `.typstignore` entry) will be removed once the logo is chosen and approved; builds currently go around it with `assets/logo_temporary.svg`.
 - Content parameters come in `fi`/`en` pairs (title, degree, programme, keywords, abstract); the `language` param selects which labels are used for the title page, ToC, and symbol list. Adding a language means a new `src/data/lang.toml` section plus wiring in `src/sections/frontmatter.typ`.
 - The body text uses the Carlito font (set in `src/core/config.typ`); users need it installed to match KAMK's look.
 - `just bump` does not update the README's `Version X.Y.Z` heading — its regex expects an HTML-escaped `&gt;Version` label, which the README no longer uses. It only updates `typst.toml` and the `kamk-thesis:X.Y.Z` package references.

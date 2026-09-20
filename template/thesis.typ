@@ -18,7 +18,7 @@
   keywords-fi: ("aerosolifysiikka", "avainsana 2", "avainsana 3"),
   abstract-fi: [
     Tähän tulee opinnäytetyön suomenkielinen tiivistelmä. Typst sallii kappalejakojen tekemisen yksinkertaisesti jättämällä tyhjän rivin tekstien väliin.
-    
+
     Tämä tässä on toinen kappale tiivistelmässä.
   ],
 
@@ -28,7 +28,7 @@
   degree-programme-en: "Business Information Technology",
   keywords-en: ("aerosol physics", "keyword 2", "keyword 3"),
   abstract-en: [
-    
+
     #lorem(50)
 
     #lorem(30)
@@ -60,7 +60,11 @@
   usage: [(Kuvaa tähän, mihin tarkoitukseen ja miten tekoälyä on käytetty opinnäytetyössä ja opinnäytetyöprosessin eri vaiheissa.)],
 )
 
-#template.render-bibliography(language: language, source: path("references.bib"))
+#template.render-bibliography(
+  language: language,
+  source: path("references.bib"),
+  // cover_image_source: "Photo by John Doe on Unsplash (CC-BY 4.0). URL: https://unsplash.com...", // Uncomment and fill if using a custom cover image
+)
 
 // Arabic page numbers stop here; appendix pages carry their own "Liite N i/total" numbering.
 #set page(numbering: none)
