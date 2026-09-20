@@ -1,5 +1,5 @@
 # The `kamk-thesis` Package
-<div align="center">Version 0.1.0</div>
+<div align="center">Version 0.0.1</div>
 
 A Typst template for theses at Kajaani University of Applied Sciences (KAMK): title page, Finnish and English abstracts, table of contents, optional list of symbols, and body chapters with KAMK's official page geometry and automatic page numbering.
 
