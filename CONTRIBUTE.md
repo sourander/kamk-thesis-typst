@@ -31,7 +31,7 @@ Then, you can add your test files to the `tests/my-test-name` folder. The test w
 
 This repository requires a GitHub Fine-Grained PAT (Personal Access Token). For this, a token called `typst-package-token` has been created. It has the following permissions:
 
-* Only selected repositories: `kamk-thesis-typst`
+* Only selected repositories: `sourander/typst-packages`
 * Repository permissions:
   * Contents: Read and Write
   * Metadata: Read (*note: this is GitHub default*)

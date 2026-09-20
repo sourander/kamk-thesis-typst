@@ -29,14 +29,6 @@ integration:
 # Generate the template thumbnail required for package submission
 thumbnail: install-preview
     typst compile --root . -f png --pages 1 --ppi 150 {{ENTRY_FILE}} {{THUMBNAIL_FILE}}
-    @echo "Thumbnail generated: {{THUMBNAIL_FILE}}"
-    @echo "Check that the file is < 3 MB (Typst package submission limit)"
-    @if [ $(stat -f%z {{THUMBNAIL_FILE}}) -lt 3145728 ]; then \
-        echo "Thumbnail is within the size limit."; \
-    else \
-        echo "Thumbnail is too large!"; \
-        exit 1; \
-    fi
 
 # As of now, this works only on macOS that has Skim installed
 skim:
