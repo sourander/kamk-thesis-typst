@@ -66,8 +66,8 @@ If there would be a reason to retry after a failed tag release, one would need t
 
 ```bash
 # Delete
-git tag -d v1.2.3
-git push origin :refs/tags/v1.2.3
+git tag -d v0.0.1
+git push --delete origin v0.0.1
 
 # Create again
 git tag -a v1.2.3 -m "Release v1.2.3"
