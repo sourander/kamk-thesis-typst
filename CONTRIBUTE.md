@@ -66,8 +66,8 @@ If there would be a reason to retry after a failed tag release, one would need t
 
 ```bash
 # Delete
-git tag -d v0.0.1
-git push --delete origin v0.0.1
+git tag -d v1.2.3
+git push --delete origin v1.2.3
 
 # Create again
 git tag -a v1.2.3 -m "Release v1.2.3"
@@ -88,3 +88,47 @@ To start a Pull Request (PR) to merge the changes from the fork repository to th
 2. Click on the **Pull requests** tab.
 3. Click on the **New pull request** button.
 
+
+The merge title should be simply e.g. `kamk-thesis:1.2.3` and the description should follow their given template, which is as of 2026-09-20 the following:
+
+```markdown
+<!--
+Thanks for submitting a package! Please read and follow the submission guidelines detailed in the repository's README and check the boxes below. Please name your PR as `name:version` of the submitted package.
+
+If you want to make a PR for something other than a package submission, just delete all this and make a plain PR.
+-->
+
+I am submitting
+- [x] a new package
+- [ ] an update for a package
+
+<!--
+Please add a brief description of your package below and explain why you think it is useful to others. If this is an update, please briefly say what changed.
+-->
+
+Description: A Typst template for formatting theses and academic documents according to the guidelines of Kajaani University of Applied Sciences (KAMK).
+
+<!--
+These things need to be checked for a new submission to be merged. If you're just submitting an update, you can delete the following section.
+-->
+
+I have read and followed the submission guidelines and, in particular, I
+- [x] selected [a name](https://github.com/typst/packages/blob/main/docs/manifest.md#naming-rules) that isn't the most obvious or canonical name for what the package does
+  - Explanation:
+    <!--
+    Please write one or two sentences explaining:
+    1. The name `kamk-thesis` uses the acronym for Kajaani University of Applied Sciences (Kajaanin ammattikorkeakoulu) paired with the document type.
+    2. The name complies with the naming rules because it uses an institution-specific prefix (`kamk-`), ensuring it does not squat on generic or canonical terms like `thesis` or `academic-report`.
+    -->
+- [x] added a [`typst.toml`](https://github.com/typst/packages/blob/main/docs/manifest.md#package-metadata) file with all required keys
+- [x] added a [`README.md`](https://github.com/typst/packages/blob/main/docs/documentation.md) with documentation for my package
+- [x] have chosen [a license](https://github.com/typst/packages/blob/main/docs/licensing.md) and added a `LICENSE` file or linked one in my `README.md`
+- [x] tested my package locally on my system and it worked
+- [x] [`exclude`d](https://github.com/typst/packages/blob/main/docs/tips.md#what-to-commit-what-to-exclude) PDFs or README images, if any, but not the LICENSE
+
+<!--
+The following box only needs to be checked for **template** submissions. If you're submitting a package that isn't a template, you can delete the following section. See the guidelines section about licenses in the README for more details.
+-->
+- [x] ensured that my package is licensed such that users can use and distribute the contents of its template directory without restriction, after modifying them through normal use.
+
+```

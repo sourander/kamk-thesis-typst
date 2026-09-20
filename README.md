@@ -62,7 +62,7 @@ For more usage examples, see the Zensical-generated documentation at [https://so
 
 For any problems, please contact the key maintainer, Jani Sourander. You should be KAMK's student if you are reading this. Use KAMK's internal communication channels to reach out to me.
 
-For contributing, see [`CONTRIBUTE.md`](CONTRIBUTE.md) for instructions on how to set up a development environment and run tests.
+For contributing, see the original repository and the included contribution markdown file.
 
 ## Acknowledgments
 
