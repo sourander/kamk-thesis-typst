@@ -5,15 +5,26 @@ A Typst template for theses at Kajaani University of Applied Sciences (KAMK): ti
 
 ## Getting Started
 
-### Installation
+### Local usage
 
-Prerequisites: the [`typst`](https://typst.app/docs/) and [`just`](https://github.com/casey/just) CLIs.
+1. Install the [`typst`](https://typst.app/docs/) compiler.
+2. Run the following command in your terminal to install the package:
 
-```
-typst install @preview/kamk-thesis:0.0.1
-```
+    ```
+    typst init @preview/kamk-thesis:0.0.1
+    ```
+3. Go to project's directory and run the compiler in incremental compilation mode to start working. You may exit this mode with `Ctrl` + `C` when you are done.
 
-### Usage
+    ```bash
+    cd kamk-thesis
+    typst watch thesis.typ
+    ```
+
+### Font installation
+
+The template uses the **Carlito** font for body text. Installation is guide at the [Zensical docs site](https://sourander.github.io/kamk-thesis-typst/riippuvuudet/). Compilation will fail without the font installed.
+
+### Writing your thesis
 
 After installation, you need to modify the `thesis.typ` file to include your own content. Below is a minified example of what the file contains. The `#show` block is where you define the front matter parameters, and the `#include` statements are where you include your body chapters.
 
@@ -35,32 +46,18 @@ After installation, you need to modify the `thesis.typ` file to include your own
 #include "chapters/mallipohjankayttaminen.typ"
 #include "chapters/sivut.typ"
 
-// ... AI usage declaration, bibliography and appendices follow, see the thesis.typ for full example.
+// ... AI usage declaration, bibliography and appendices follow
+// see the thesis.typ for full example.
 ```
 
-### Previewing your thesis
-
-When you want to see a preview of your thesis, run the following `Justfile` command in the terminal. It will create a `build/thesis.pdf` file with your thesis content and keep the file updated as you edit your source files. You may exit this mode with `Ctrl` + `C` when you are done.
-
-```
-just preview
-```
-
-See the Zesical-generated documentation at [https://sourander.github.io/kamk-thesis-typst/](https://sourander.github.io/kamk-thesis-typst/) for more usage examples, video tutorials and so on.
-
-## Font installation
-
-The template uses the **Carlito** font for body text. Installation is guide at the [Zensical docs site](https://sourander.github.io/kamk-thesis-typst/riippuvuudet/). Compilation will fail without the font installed.
-
-## Usage
-
-`template` renders the full front matter (title page, Tiivistelmä, Abstract, Sisällys, optional symbol list) followed by your body content, with A4 paper, KAMK margins, and heading/page-numbering rules applied automatically. All content parameters come in `fi`/`en` pairs; the `language` parameter selects which labels are used for the title page, table of contents, and symbol list. A complete worked example lives in [`template/thesis.typ`](template/thesis.typ).
-
-For more usage examples, see the Zensical-generated documentation at [https://sourander.github.io/kamk-thesis-typst/](https://sourander.github.io/kamk-thesis-typst/).
+See the Zesical-generated documentation at [https://sourander.github.io/kamk-thesis-typst/](https://sourander.github.io/kamk-thesis-typst/) for more usage examples, Justfile tips, video tutorials and much more. That site is a must-read for anyone writing an actual thesis with this template.
 
 ## Problems and Contributing
 
-For any problems, please contact the key maintainer, Jani Sourander. You should be KAMK's student if you are reading this. Use KAMK's internal communication channels to reach out to me.
+For any problems, please contact the key maintainer, Jani Sourander. 
+
+- If you are a KAMK student and encounter any issues, please use KAMK's internal communication channels to reach out to me.
+- Otherwise, contact using Github issues.
 
 For contributing, see the original repository and the included contribution markdown file.
 

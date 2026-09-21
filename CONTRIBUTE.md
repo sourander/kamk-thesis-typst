@@ -77,7 +77,7 @@ When you are ready to publish a new version to Typst Universe, follow these step
 10. Update your fork repository. Navigate to your fork on GitHub and click **Sync fork** -> **Update branch** to ensure your main branch is up to date with `typst/packages`.
 11. Navigate to the **Pull requests** tab in your fork and click **New pull request**.
 12. Set the PR title strictly to `kamk-thesis:1.2.3` *(matching your new version)*.
-13. Use the following template for the PR description:
+13. Use the provided template for the PR description. The original one is here for reference, but updates require less detail:
 
 ```markdown
 <!--
