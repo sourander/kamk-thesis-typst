@@ -1,4 +1,4 @@
-#import "colors.typ": code-block-bg
+#import "colors.typ": code-block-bg, table-stroke
 
 #let lang-data = toml("../data/lang.toml")
 
@@ -13,14 +13,14 @@
 }
 
 /*
-  Equation numbering defaults, kept separate from setup-body-page so it can be
-  applied and tested on its own (see tests/math-fi).
-  Takes `body` for the same set-rule-scoping reason as setup-document.
+Equation numbering defaults, kept separate from setup-body-page so it can be
+applied and tested on its own (see tests/math-fi).
+Takes `body` for the same set-rule-scoping reason as setup-document.
 
-  - Uses Typst's built-in equation numbering (no custom counters/layout)
-  - Wraps the number in parentheses, e.g. "(1)", per KAMK conventions
-  - Uses the localized "Kaava"/"Equation" supplement instead of Typst's default "Equation"
-  */
+- Uses Typst's built-in equation numbering (no custom counters/layout)
+- Wraps the number in parentheses, e.g. "(1)", per KAMK conventions
+- Uses the localized "Kaava"/"Equation" supplement instead of Typst's default "Equation"
+*/
 #let setup-math(language: "fi", body) = {
   let lang-data = toml("../data/lang.toml")
   set math.equation(numbering: "(1)", supplement: lang-data.at(language).equation)
@@ -28,14 +28,14 @@
 }
 
 /*
-  Heading reference supplement, kept separate so it can be applied and tested
-  on its own (see tests/ch-labels-fi). Takes `body` for the same set-rule-scoping
-  reason as setup-document.
+Heading reference supplement, kept separate so it can be applied and tested
+on its own (see tests/ch-labels-fi). Takes `body` for the same set-rule-scoping
+reason as setup-document.
 
-  - Uses the localized "Luku"/"Chapter" supplement for heading references
-  - Heading numbering itself (e.g. "1.1") is enabled later, once the ToC has
-    been rendered (see frontmatter.typ), so a reference reads as "Luku 2.3"
-  */
+- Uses the localized "Luku"/"Chapter" supplement for heading references
+- Heading numbering itself (e.g. "1.1") is enabled later, once the ToC has
+  been rendered (see frontmatter.typ), so a reference reads as "Luku 2.3"
+*/
 #let setup-headings(language: "fi", body) = {
   let lang-data = toml("../data/lang.toml")
   set heading(supplement: lang-data.at(language).chapter)
@@ -56,7 +56,7 @@
   // 2. Style the raw block itself (background, padding, line numbers)
   show raw.where(block: true): it => {
     let is-long = it.text.split("\n").len() >= 10
-    
+
     let styled = {
       set text(size: 10pt)
       set par(leading: 0.75em)
@@ -80,7 +80,6 @@
   }
 
   // 3. Handle the Figure Layout (Short vs Long)
-// 3. Handle the Figure Layout (Short vs Long)
   show figure.where(kind: raw): it => {
     // Safely extract the raw element, even if the user wrapped it in square brackets
     let raw-elem = it.body
@@ -100,7 +99,7 @@
     if is-long {
       assert(
         it.caption != none,
-        message: ">= 10 rivin koodilohko vaatii kuvatekstin (caption)."
+        message: ">= 10 rivin koodilohko vaatii kuvatekstin (caption).",
       )
       // Long block: standard figure layout (caption below)
       it
@@ -111,8 +110,7 @@
           columns: (1fr, auto),
           column-gutter: 1em,
           align: (left, right + horizon),
-          it.body,
-          context counter(figure.where(kind: raw)).display("(1)")
+          it.body, context counter(figure.where(kind: raw)).display("(1)"),
         )
       ]
     }
@@ -132,7 +130,10 @@
   // Place captions above table figures.
   show figure.where(kind: table): set figure.caption(position: top)
 
-  // Render the first row of every table in bold. 
+  // Use thinner table borders.
+  set table(stroke: 0.5pt + table-stroke)
+
+  // Render the first row of every table in bold.
   // Can be overridden by the user with: set text(weight: "regular")
   show table.cell.where(y: 0): set text(weight: "bold")
 
@@ -157,9 +158,9 @@
 #let setup-body-page(language: "fi", body) = {
   set page(
     paper: "a4",
-    margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm)
+    margin: (top: 2cm, bottom: 2.5cm, left: 4.3cm, right: 1.5cm),
   )
-  
+
   show heading: set block(above: 3.0em, below: 2.0em)
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
@@ -168,7 +169,7 @@
 
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
-  
+
   // Cleanly apply all wrappers without nested parentheses
   show: setup-headings.with(language: language)
   show: setup-math.with(language: language)

@@ -47,17 +47,17 @@ bump version: && thumbnail
     # Require the supplied version to match X.Y.Z exactly, using numeric components.
     @perl -e '$v = "{{version}}"; die "bump: version must be X.Y.Z, got \"{{version}}\"\n" unless $v =~ /\A[0-9]+\.[0-9]+\.[0-9]+\z/;'
 
-    # Look for a complete TOML line such as: version = "0.1.0"
+    # Update typst.toml.
     @perl -pi -e 's/^version = "[0-9]+\.[0-9]+\.[0-9]+"$/version = "{{version}}"/' typst.toml
 
-    # Look for a Typst package reference such as: kamk-thesis:0.1.0
+    # Update the package reference in template/thesis.typ.
     @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' template/thesis.typ
 
-    # Look for an HTML-escaped version label such as: &gt;Version 0.1.0
-    @perl -pi -e 's/(&gt;Version )[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' README.md
+    # Update the version block in README.md.
+    @perl -pi -e 's{(<div align="center">Version )[0-9]+\.[0-9]+\.[0-9]+(<\/div>)}{${1}{{version}}${2}}' README.md
 
-    # Look for a Typst package reference such as: kamk-thesis:0.1.0
-    @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/' README.md
+    # Update package references in README.md.
+    @perl -pi -e 's/(kamk-thesis:)[0-9]+\.[0-9]+\.[0-9]+/${1}{{version}}/g' README.md
 
 # Print the resolved packaging configuration. Call as `just setup '@preview'`
 setup target:

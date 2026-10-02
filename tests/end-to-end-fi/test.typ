@@ -1,4 +1,5 @@
 #import "/src/lib.typ" as template
+#import "/src/lib.typ": todo
 
 // Use fixed values in regression tests.
 // Do not use datetime.today(), because the output would change over time.
@@ -68,6 +69,8 @@
 )
 
 = Johdanto
+
+#todo[Kirjoita Johdanto. Tämä on TODO-laatikko.]
 
 #lorem(100)
 
