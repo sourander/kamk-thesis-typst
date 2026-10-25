@@ -17,4 +17,4 @@ typst init @preview/kamk-thesis
 cd kamk-thesis
 ```
 
-Nyt voit alkaa työskennellä. Seuraavia komentoja ei tarvitse osata ulkoa, vaan ne ovat lisätty `Justfile`-tiedostoon, ja niiden käyttö on kuvattu [Just-dokumentaatiossa](just.md).
+Nyt voit alkaa työskennellä. Seuraavia komentoja ei tarvitse osata ulkoa, vaan ne ovat lisätty `Justfile`-tiedostoon, ja niiden käyttö on kuvattu [Just-dokumentaatiossa](../valinnaiset/just.md).

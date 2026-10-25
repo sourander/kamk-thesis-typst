@@ -1,7 +1,5 @@
 nav:
   - typst.md
-  - just.md
   - carlito.md
   - pdf.md
-  - "*"
-  - apureita.md
+  - vscode.md

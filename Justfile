@@ -85,4 +85,4 @@ uninstall-preview: (remove "@preview")
 
 # Run docs locally for development.
 docs:
-    uvx zensical serve
+    uvx zensical@latest serve
