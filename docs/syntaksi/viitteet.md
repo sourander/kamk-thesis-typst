@@ -12,7 +12,7 @@ Tämä materiaali ei pyri olemaan sisällön puolesta kattava ohjeistus tekstivi
 
 Kuvitellaan, että sinulla on käsissäsi No Strach Pressin kirja "Introduction to System Programming in Linux" (Weiss, 2025). Kyseessä on fyysinen kirja, joten lähteluettelon vaatimuksena pitäisi löytyä kentät: author, title, date, publisher ja lisäksi saatavuuden muakan location, edition ja url. Lisäät siis (Zoteron avulla tai käsin) seuraavan viitteen `references.bib`-tiedostoon:
 
-```bibtex
+``` bibtex
 @book{weiss2025introduction,
   title = {Introduction to System Programming in Linux},
     author = {Weiss, Stewart},
@@ -25,13 +25,13 @@ Kuvitellaan, että sinulla on käsissäsi No Strach Pressin kirja "Introduction 
 
 Kyseessä on noin 700-sivuinen kirja, joten viittaus tekstissä on järkevää tehdä sivunumeroiden kanssa, mikäli viittaat johonkin tiettyyn sivuun tai sivualueeseen. Tämä palvelee sekä sinua itsesäsi, jos haluat tarkistaa viittauksen kohdan myöhemmin, että lukijaa, joka haluaa löytää alkuperäisen viittauksen äärelle. Typst-kielessä viittaus tehdään seuraavasti:
 
-```typst
+``` typst
 Putki-operaattori (`|`) on tuettu useimmissa kuorissa (_engl. shell_), kuten
 Bash-kuoressa, ja se mahdollistaa yhden komennon tulosteen syöttämisen toisen
 komennon syötteeksi @weiss2025introduction[s.~123--125].
 ```
 
-Tpyst hallinnoi sinun puolestasi lähdeluettelon muodostamisen CSL-tiedostossa määriteltyjä sääntöjä vasten. Viite saa automaattisesti oman juoksevan numeron esiintymisjärjestyksen mukaan.
+Typst hallinnoi sinun puolestasi lähdeluettelon muodostamisen CSL-tiedostossa määriteltyjä sääntöjä vasten. Viite saa automaattisesti oman juoksevan numeron esiintymisjärjestyksen mukaan.
 
 !!! tip "Miksi tilde?"
 
@@ -41,9 +41,44 @@ Tpyst hallinnoi sinun puolestasi lähdeluettelon muodostamisen CSL-tiedostossa m
 
 Alla taulukossa eri tavat, joilla saatat haluta käyttää viittausta:
 
-| Tapa                    | Esimerkki                                 | Selitys                                                                                                             |
-| ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Viittaus                | `@nameTitle1999`                          | Viittaus ilman sivunumeroa. Viittaat koko teokseen; totuus ei siis löyty tietyltä sivualueelta vaan koko teoksesta. |
-| Viittaus sivunumeroilla | `@nameTitle1999[s.~123--125]`             | Viittaus tietylle sivualueelle.                                                                                     |
-| Viittaus kappaleella    | `@nameTitle1999[luku 13 Pipes and FIFOs]` | Viittaus tiettyyn kappaleeseen. Kätevä e-kirjan kanssa, josta puuttuu sivunumerot (esim. O'Reilly).                 |
-| Viittaus aikakoodilla   | `@nameTitle1999[00:01:15--00:02:30]`      | Videon, Pocastin ja vastaavan kanssa käyttökelpoinen.                                                               |
+| Tapa                              | Esimerkki                                 | Selitys                                                                                                             |
+| --------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Viittaus                          | `@nameTitle1999`                          | Viittaus ilman sivunumeroa. Viittaat koko teokseen; totuus ei siis löydy tietyltä sivualueelta vaan koko teoksesta. |
+| Viittaus koko kappaleeseen        | `@nameTitle1999[.]`                       | Viittaus usean virkkeen kokonaisuuteen ilman sivunumeroa (tulostuu muodossa `[1.]`).                                |
+| Viittaus sivunumeroilla           | `@nameTitle1999[s.~123--125]`             | Viittaus tietylle sivualueelle yhden virkkeen lopussa.                                                              |
+| Viittaus sivunumeroilla (kappale) | `@nameTitle1999[s.~123--125.]`            | Viittaus tietylle sivualueelle, kun viitataan usean virkkeen kokonaisuuteen (tulostuu muodossa `[1, s. 123–125.]`). |
+| Viittaus kappaleella              | `@nameTitle1999[luku 13 Pipes and FIFOs]` | Viittaus tiettyyn kappaleeseen. Kätevä e-kirjan kanssa, josta puuttuu sivunumerot (esim. O'Reilly).                 |
+| Viittaus aikakoodilla             | `@nameTitle1999[00:01:15--00:02:30]`      | Videon, Podcastin ja vastaavan kanssa käyttökelpoinen.                                                              |
+
+## Pisteen paikka viitteessä (yksi virke vs. useampi virke)
+
+KAMK:n opinnäytetyöohjeistuksen mukaan pisteen sijainnilla kerrotaan, kohdistuuko viite vain yhteen virkkeeseen vai useamman virkkeen kokonaisuuteen (tyypillisesti koko tekstikappaleeseen):
+
+- **Viittaus yhteen virkkeeseen:** Virkkeen päättävä piste tulee viitteen *jälkeen*, eikä hakasulkeiden sisälle laiteta pistettä (esim. `...tekstiä [1].` tai `...tekstiä [1, s. 123–125].`).
+- **Viittaus useaan virkkeeseen:** Viimeisen virkkeen päättävä piste tulee *ennen* viitettä, ja hakasulkeiden *sisälle* lisätään piste (esim. `...tekstiä. [1.]` tai `...tekstiä. [1, s. 123–125.]`).
+
+Typstissä piste saadaan hakasulkeiden sisälle antamalla viitteelle tarkenteeksi pelkkä piste `[.]` tai päättämällä sivunumerotarkenne pisteeseen:
+
+```typst
+// Yhden virkkeen viittaus (piste viitteen perässä):
+Putki-operaattori on tuettu useimmissa kuorissa @weiss2025introduction.
+Putki-operaattori on tuettu useimmissa kuorissa @weiss2025introduction[s.~123--125].
+
+// Usean virkkeen / koko kappaleen viittaus (piste ennen viitettä JA hakasulkeiden sisällä):
+Tekniikan Sanastokeskuksen mukaan resoluutio ilmaisee, miten tarkasti kuvan
+yksityiskohdat pystytään esittämään näytössä tai painettuna. Kuvan resoluutio
+ilmaistaan esimerkiksi pikseleinä pituusmittaa kohti. @weiss2025introduction[.]
+
+Tekniikan Sanastokeskuksen mukaan resoluutio ilmaisee, miten tarkasti kuvan
+yksityiskohdat pystytään esittämään näytössä tai painettuna. Kuvan resoluutio
+ilmaistaan esimerkiksi pikseleinä pituusmittaa kohti. @weiss2025introduction[s.~123--125.]
+```
+
+Kaikki neljä muotoa ovat siis täysin käypiä, mutta pisteellisillä muodoilla (`[.]` ja `[s.~123--125.]`) on erityismerkitys: ne viittaavat yhtä virkettä laajempaan edeltävään kokonaisuuteen:
+
+```typst
+@weiss2025introduction
+@weiss2025introduction[.]
+@weiss2025introduction[s.~123--125]
+@weiss2025introduction[s.~123--125.]
+```

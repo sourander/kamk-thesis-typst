@@ -170,6 +170,13 @@ reason as setup-document.
   set par(spacing: 3.0em)
   show heading: set text(size: 11pt, weight: "regular")
 
+  // Allow @someRef[.] to render as [1.] (dot inside brackets without a comma)
+  // while keeping [1, s. 10] for normal locators.
+  show cite: it => {
+    show ", .": "."
+    it
+  }
+
   // Cleanly apply all wrappers without nested parentheses
   show: setup-headings.with(language: language)
   show: setup-math.with(language: language)

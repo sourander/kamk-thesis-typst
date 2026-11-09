@@ -1,5 +1,5 @@
 #import "/src/lib.typ" as template
-#import "/src/core/config.typ": setup-document, setup-body-page
+#import "/src/core/config.typ": setup-body-page, setup-document
 #import "/src/sections/bibliography.typ": render-bibliography
 
 #let language = "fi"
@@ -8,7 +8,7 @@
 #show: setup-document.with(
   title: "Does not matter here",
   authors: ("Not used here",),
-  language: language
+  language: language,
 )
 
 // Apply body-page geometry and heading styles.
@@ -23,6 +23,8 @@
 = Testiluvun otsikko
 
 Kirja @vilkkaTutkiJaKehita2021[s.~10--14].
+Kirja siten, että monta lausetta liittyy siihen. @vilkkaTutkiJaKehita2021[.]
+Sama siten, että mukana on myös sivunumero. @vilkkaTutkiJaKehita2021[s.~10--14.]
 Julkaisusarjan julkaisu @lerkkanenOpettajienTyohyvinvointiJa2020[s.~5--7].
 Celia-äänikirja @hirsjarviTutki2007.
 Artikkeli @vilkkaTarinoillaTasaarvoon2019.

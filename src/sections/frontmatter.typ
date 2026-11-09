@@ -114,6 +114,12 @@
       set page(numbering: "1", number-align: top + right)
       counter(page).update(1)
 
+      // Base line spacing is 1.5em; Word's "Before: 36 pt, After: 24 pt" (H2+)
+      // and "After: 36 pt" (H1) add ~3.0em (36 pt) and ~2.0em (24 pt) on top of it.
+      // Applied here so frontmatter headings (Abstract, Foreword, ToC, Symbols) are unaffected.
+      show heading: set block(above: 4.5em, below: 3.5em)
+      show heading.where(level: 1): set block(below: 4.5em)
+
       // Body text of the document starts here
       body
     })

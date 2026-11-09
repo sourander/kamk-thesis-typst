@@ -70,9 +70,9 @@
 
 = Johdanto
 
-#todo[Kirjoita Johdanto. Tämä on TODO-laatikko.]
-
 #lorem(100)
+
+#todo[Kirjoita Johdanto. Tämä on TODO-laatikko.]
 
 #lorem(50)
 
@@ -80,6 +80,7 @@
 
 = Feikki luku
 
+#lorem(40)
 
 == Matikka
 
