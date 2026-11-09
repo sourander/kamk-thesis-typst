@@ -1,4 +1,4 @@
-#import "@preview/kamk-thesis:0.0.2" as template
+#import "@preview/kamk-thesis:0.0.3" as template
 
 // Single source of truth for the thesis language; reused by every render-* call below.
 #let language = "fi"

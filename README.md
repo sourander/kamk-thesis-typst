@@ -1,5 +1,5 @@
 # The `kamk-thesis` Package
-<div align="center">Version 0.0.2</div>
+<div align="center">Version 0.0.3</div>
 
 A Typst template for theses at Kajaani University of Applied Sciences (KAMK): title page, Finnish and English abstracts, table of contents, optional list of symbols, and body chapters with KAMK's official page geometry and automatic page numbering.
 
@@ -11,7 +11,7 @@ A Typst template for theses at Kajaani University of Applied Sciences (KAMK): ti
 2. Run the following command in your terminal to install the package:
 
     ```
-    typst init @preview/kamk-thesis:0.0.2
+    typst init @preview/kamk-thesis:0.0.3
     ```
 3. Go to project's directory and run the compiler in incremental compilation mode to start working. You may exit this mode with `Ctrl` + `C` when you are done.
 
@@ -29,7 +29,7 @@ The template uses the **Carlito** font for body text. Installation is guide at t
 After installation, you need to modify the `thesis.typ` file to include your own content. Below is a minified example of what the file contains. The `#show` block is where you define the front matter parameters, and the `#include` statements are where you include your body chapters.
 
 ```typ
-#import "@preview/kamk-thesis:0.0.2" as template
+#import "@preview/kamk-thesis:0.0.3" as template
 
 #show: template.frontmatter.with(
   // Perustiedot
