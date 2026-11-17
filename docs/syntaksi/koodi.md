@@ -15,7 +15,7 @@ def summa(a, b):
 ```
 ````
 
-Jos haluat pystyä viittaamaan lohkoon tekstissä (esim. `@summa`), kääri se tyhjään `figure`-komentoon ja anna sille tunniste:
+Jos haluat pystyä viittaamaan lohkoon tekstissä (esim. `@code:summa`), kääri se tyhjään `figure`-komentoon ja anna sille tunniste:
 
 ````typst
 #figure()[
@@ -23,7 +23,7 @@ Jos haluat pystyä viittaamaan lohkoon tekstissä (esim. `@summa`), kääri se t
   def summa(a, b):
       return a + b
   ```
-] <summa>
+] <code:summa>
 ````
 
 ## Pitkä koodilohko
@@ -47,10 +47,10 @@ Vähintään 10 rivin koodilohko saa automaattisesti juoksevat rivinumerot ja *v
 
   print(fibonacci(10))
   ```
-] <fibonacci>
+] <code:fibonacci>
 ````
 
-Pitkät ja lyhyet koodilohkot jakavat saman juoksevan numeroinnin: pitkä lohko näyttää numeronsa kuvatekstinä (esim. **Koodi 1**), kun taas lyhyt lohko näyttää oman numeronsa suluissa (esim. `(2)`) lohkon oikeassa reunassa, eikä sitä luetella kuvien luettelossa. Numerointi on globaali koko dokumentin läpi eikä nollaudu lukujen väliin. Koodilohkoon voi viitata label-viittauksella, esim. `@fibonacci`.
+Pitkät ja lyhyet koodilohkot jakavat saman juoksevan numeroinnin: pitkä lohko näyttää numeronsa kuvatekstinä (esim. **Koodi 1**), kun taas lyhyt lohko näyttää oman numeronsa suluissa (esim. `(2)`) lohkon oikeassa reunassa, eikä sitä luetella kuvien luettelossa. Numerointi on globaali koko dokumentin läpi eikä nollaudu lukujen väliin. Koodilohkoon voi viitata label-viittauksella, esim. `@code:fibonacci`.
 
 ## Kummankin lohkotyypin yhteiset piirteet
 

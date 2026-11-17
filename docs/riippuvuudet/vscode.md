@@ -16,7 +16,6 @@ Se onnistuu näin:
 
 Jatkossa voit mennä toiseen tiedostoon, kuten `chapters/johdanto.typ`, ja Typst-linteri tietää silti, että päädokumentti on `thesis.typ`. Näin esimerkiksi viitteiden tarkistus toimii oikein, koska päädokumentti on se, jossa viitteet kootaan.
 
-## (Optional) pdf
+!!! tip
 
-[vscode-pdf](https://marketplace.visualstudio.com/items?itemName=tomoki1207.pdf) on VS Code -laajennus, joka mahdollistaa PDF-tiedostojen katselun suoraan editorissa. Tämä on ==vaihtoehto== sille, että käytät jotakin ulkoista PDF-lukijaohjelmistoa. Minä suosin ulkoista ohjelmistoa monista syistä, jotka ovat helpompi esitellä videotallenteella kuin tässä tekstinä, joten käyn aihealueen läpi vain ja ainoastaan tämän materiaalin videoversiossa.
-
+    Lisäosan avulla on mahdollista klikata "Typst Preview"-näppäintä, kunhan päädokumentti on aktiivisena ja tilassa _pinned_. Tämä avaa esikatselun, jossa tekstin klikkaaminen synkronoi avatun `.typ`-tiedoston sijainnin esikatselussa. Tämä on kätevä ominaisuus ja toimii vaihtoehtoja `typst watch`-komennolle ja ulkoiselle PDF-lukijalle. Video-ohjeessa avataan tämän hyötyjä ja haittoja: ohjeen laatija on käyttänyt kumpaakin sekaisin riippuen siitä, kirjoitetaanko uutta sisältöä vai tehdäänkö tarkistuksia ja korjauksia.

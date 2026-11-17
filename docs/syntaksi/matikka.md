@@ -29,7 +29,7 @@ Kun yhtälö kirjoitetaan omaksi lohkokseen, Typst asettaa sen omalle rivilleen 
   miinus neljä a c, jaettuna kahdella a:lla",
   block: true,
   $ x = (-b plus.minus sqrt(b^2 - 4a c)) / (2a) $,
-) <yhtalo-toisen-asteen>
+) <eq:toisen-asteen>
 ```
 
 Numero näkyy sulkeissa rivin oikeassa reunassa, esim. **(1)**. Numerointi on globaali koko dokumentin läpi; se ei nollaudu lukujen väliin. Alt-teksti kuvaa kaavan luonnollisella kielellä, ikään kuin lukisit sen ääneen.

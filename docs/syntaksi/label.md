@@ -5,7 +5,8 @@ Nimiöt (_engl. label_) ovat nimiä, joita käytetään viittaamaan eri elementt
 - otsikoille,
 - kuville,
 - taulukoille,
-- ja kaavoille
+- kaavoille,
+- ja koodilohkoille
 
 Nimiöt mahdollistavat sen, että voit tekstissä viitata kyseiseen asiaan myöhemmin tai aiemmin. PDF-tiedostossa nämä ovat klikattavia linkkejä.
 
@@ -37,5 +38,7 @@ Voi olla hyvä käyttää nimeämiseen de facto standardia, jossa lisäät etuli
 | `sec:`   | (Ali)luvut      |
 | `fig:`   | Kuvat           |
 | `tab:`   | Taulukot        |
+| `eq:`    | Kaavat          |
+| `code:`  | Koodilohkot     |
 
 Tätä standardia käyttäen yllä olevan pizzaesimerkin nimiö olisi voitu nimetä `sec:pizza-spam`.

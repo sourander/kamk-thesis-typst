@@ -35,7 +35,7 @@ Typstillä on oma Hayagrive YAML -lähdeformaatti, mutta ainakaan 2026 Zotero ei
 
 Formaatti on muotoa, jossa seuraavanlaisia entryjä on useita peräkkäin `.bib`-tiedostossa:
 
-```plaintext
+``` plaintext
 @<lähdetyyppi>{<tunniste>,
     <kenttä> = {<arvo>},
     <kenttä> = {<arvo>},
@@ -79,7 +79,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @book{vilkkaTutkiJaKehita2021,
         title = {Tutki Ja Kehitä},
         author = {Vilkka, Hanna},
@@ -115,7 +115,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @book{lerkkanenOpettajienTyohyvinvointiJa2020,
         title = {Opettajien Työhyvinvointi Ja Sen Yhteys Pedagogisen Työn Laatuun},
         author = {Lerkkanen, Marja-Kristiina and Pakarinen, Eija and Messala, Maiju and Penttinen, Viola and Aulén, Anna-Mari and Jõgi, Anna-Liisa},
@@ -150,7 +150,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @book{hirsjarviTutki2007,
         title = {Tutki ja kirjoita},
         author = {Hirsjärvi, Sirkka},
@@ -182,7 +182,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @article{vilkkaTarinoillaTasaarvoon2019,
         title = {Tarinoilla Tasa-Arvoon? {{Narratiivisten}} Menetelmien Mahdollisuuksia Kriittisessä Toimintatutkimuksessa},
         author = {Vilkka, Hanna and Ylöstalo, Hanna},
@@ -223,7 +223,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @incollection{fordCellCycleRegulatory2004,
         title = {Cell {{Cycle Regulatory Cascades}}},
         booktitle = {Cell {{Cycle}} and {{Growth Control}}},
@@ -261,7 +261,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{paukkuTekoalyVoiMuokata2022,
         title = {Tekoäly voi muokata verkkokuvaasi niin, että näytät yhä kivemmalta ja fiksummalta},
         author = {Paukku, Timo},
@@ -294,7 +294,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{kuntaliittoAlueiden,
         title = {Alueiden Kehittäminen},
         date = {2022},
@@ -322,7 +322,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{keranenIntranet2023,
         author = {Keränen, T.},
         title = {KAMKin viestintä. [Intranet]},
@@ -350,7 +350,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @thesis{korhonenVuokatti2018,
         author = {Korhonen, E. and Mannerjärvi, I.},
         title = {Henkilökohtainen asiakaspalvelu ja palvelupolku Vuokatissa. [AMK-opinnäytetyö]},
@@ -380,7 +380,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @legislation{lakiTietosuojalaki2018,
         author = {{L 2018/1050}},
         title = {Tietosuojalaki},
@@ -432,7 +432,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX-merkintä"
 
-    ```bibtex
+    ``` bibtex
     @dataset{tilastokeskusHotellien2020,
       author = {{Tilastokeskus}},
       title = {Hotellien kuukausittainen kapasiteetti ja yöpymiset kunnittain [Tilasto]},
@@ -461,7 +461,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{jokinenLuento2017,
         author = {Jokinen, R.},
         title = {Tiedonhaun keskeiset käsitteet. [Luentotallenne]},
@@ -491,7 +491,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{janttiWebinaari2022,
         author = {Jäntti, M.},
         title = {Digital Afternoon: Digital solutions for forestry. [Webinaari]},
@@ -520,7 +520,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{alasalmiSahkoposti2018,
         author = {Alasalmi, K.},
         title = {Erikoissairaanhoitaja. [Sähköposti]},
@@ -550,7 +550,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{lundbergPodcast2023,
         author = {Lundberg, T.},
         title = {Hyvät tunnetaidot auttavat lasta ja aikuista elämässä! [Podcast]},
@@ -580,7 +580,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{nasaInstagram2022,
         author = {{Nasa}},
         title = {We found “buried treasure,” and the Cosmic Cliffs mark the spot. [Instagram-kuva]},
@@ -612,7 +612,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{vollmerThrees2014,
         author = {Vollmer, A. and Wohlwend, G.},
         title = {Threes. [Mobiilipeli]},
@@ -643,7 +643,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @unpublished{failsafeFallback,
         title = {Mäkinen M. Jotain täysin mahdotonta [Erikoislähde]. Kajaani; 2024. Saatavilla: https://kajaani.fi}
     }
@@ -673,7 +673,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @online{vaswaniAttentionAllYou2023,
         title = {Attention {{Is All You Need}}},
         author = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia},
@@ -711,7 +711,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
         @book{gutmanBecomingDataHead2021,
         title = {Becoming a {{Data Head}}},
         author = {Gutman, Alex J. and Goldmeier, Jordan},
@@ -731,7 +731,7 @@ Lähdeluettelossa se näyttää tältä:
 
 Zoteron lähdetyyppi: **Conference Paper**
 
-Erityisesti tietojenkäsittelytieteissä konferenssijulkaisut ovat merkittävä uuden tiedon lähde. Kyseessä on siis jossakin alan konferenssissa, mieluiten maineikkaassa sellaisessa, esitelty uusi tutkimus. Siihen liittyy ainakin kaksi arfefaktia: **poster** ja **conferenfe paper**. Poster on konferenssissa esitelty juliste, ja conference paper on konferenssin proceedings-kirjaan painettu artikkeli. Media on BibLaTeXissa `@inproceedings` eli siis.. _"a conference paper in proceedings"_.
+Erityisesti tietojenkäsittelytieteissä konferenssijulkaisut ovat merkittävä uuden tiedon lähde. Kyseessä on siis jossakin alan konferenssissa, mieluiten maineikkaassa sellaisessa, esitelty uusi tutkimus. Siihen liittyy ainakin kaksi arfefaktia: **poster** ja **conference paper**. Poster on konferenssissa esitelty juliste, ja conference paper on konferenssin proceedings-kirjaan painettu artikkeli. Media on BibLaTeXissa `@inproceedings` eli siis.. _"a conference paper in proceedings"_.
 
 Jos tutkisit esimerkiksi selitettävää AI:ta ja SHAP-menetelmää, saattaisit törmätä NeurIPS 2025 konferenssin `proceedings.neurips.cc`-sivustolta löytyvään julkaisujen kokoelmaan. Yksi näistä on otsikoltaan _"SHAP Meets Tensor Networks: Provably Tractable Explanations with Parallelism"_. Käyttäkäämme sitä esimerkkinä. Sen Bibtex-merkintä on ladattavissa suoraan [konferenssin sivuilta](https://proceedings.neurips.cc/paper_files/paper/2025/hash/2b11f497dd931bbe14501ff39c48047b-Abstract-Conference.html).
 
@@ -744,7 +744,7 @@ Jos tutkisit esimerkiksi selitettävää AI:ta ja SHAP-menetelmää, saattaisit 
 | `publisher`     | `Curran Associates, Inc.`                                                      | Publisher             |
 | `date`          | `2025`                                                                         | Date                  |
 | `pages`         | `29973--30016`                                                                 | Pages                 |
-| `volume`        | `38, Main Conference`                                                          |
+| `volume`        | `38, Main Conference`                                                          |                       |
 
 Lähdeluettelossa se näyttää tältä:
 
@@ -752,7 +752,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @inproceedings{NEURIPS2025_2b11f497,
         author = {Marzouk, Reda and Bassan, Shahaf and Katz, Guy},
         booktitle = {Advances in Neural Information Processing Systems},
@@ -773,7 +773,7 @@ Ei ole kummallinen tämä lähde. Kyseessä on aivan tavallisen painetun lehden,
 
 | BibLaTeX-kenttä | Esimerkkiarvo    | Kentän nimi Zoterossa |
 | --------------- | ---------------- | --------------------- |
-| `author`        | `Sievinen, Anna` |
+| `author`        | `Sievinen, Anna` |                       |
 | `title`         | `Viisas veijari` | Title                 |
 | `date`          | `2026`           | Date                  |
 | `journaltitle`  | `Tiede Luonto`   | Publication           |
@@ -787,7 +787,7 @@ Lähdeluettelossa se näyttää tältä:
 
 ??? info "BibLaTeX entry"
 
-    ```bibtex
+    ``` bibtex
     @article{sievinenViisasVeijari2026,
         author = {Sievinen, Anna},
         title = {Viisas veijari},

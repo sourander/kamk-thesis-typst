@@ -2,7 +2,7 @@
 
 Taulukot tehdään Typstin vakio-ominaisuuksilla (`table`-komento), eikä `kamk-thesis`-mallipohja tuo siihen omaa erikoissyntaksia. Mallipohja vain muotoilee taulukot automaattisesti: kuvateksti (`caption`) sijoitetaan taulukon *yläpuolelle* ja ensimmäinen rivi lihavoidaan, koska se on yleensä otsikkorivi.
 
-Jokaisella taulukolla on oltava kuvateksti, ja siihen on viitattava tekstistä esim. `@taulukko-carbonara`. Tämän takia taulukko käärtään aina `figure`-komennon sisään ja sille annetaan tunniste (`label`):
+Jokaisella taulukolla on oltava kuvateksti, ja siihen on viitattava tekstistä esim. `@tab:carbonara`. Tämän takia taulukko käärtään aina `figure`-komennon sisään ja sille annetaan tunniste (`label`):
 
 ```typst
 #figure(
@@ -16,7 +16,7 @@ Jokaisella taulukolla on oltava kuvateksti, ja siihen on viitattava tekstistä e
     [1 g], [Mustapippuria],
   ),
   caption: [Pasta carbonaran ainesosat.],
-) <taulukko-carbonara>
+) <tab:carbonara>
 ```
 
 Numero näkyy kuvatekstissä (esim. **Taulukko 1**), ja numerointi on globaali koko dokumentin läpi, samaan tapaan kuin kuvilla ja koodilohkoilla.
@@ -42,8 +42,41 @@ Typstin oma `table`-komento taipuu myös monimutkaisempiin tarpeisiin, jos sella
     [24],
   ),
   caption: [Esimerkki mukautetusta taulukosta.],
-) <taulukko-mukautettu>
+) <tab:mukautettu>
 ```
+
+## Esimerkki tyylitellystä taulukosta
+
+Jos taulukossa on pidempiä tekstejä, sen luettavuutta ja tilankäyttöä voi parantaa pienentämällä taulukon tekstikokoa `text(size: 10pt, ...)`-kääreellä sekä määrittämällä sarakkeiden leveydet (`columns`), tasaukset (`align`) ja reunaviivat (`stroke`). Voit kopioida alla olevan esimerkin suoraan omaan mallipohjaasi ja kokeilla, miltä se näyttää:
+
+```typst
+#figure(
+  text(size: 10pt, table(
+    columns: (auto, auto, auto),
+    align: (left, left),
+    stroke: 0.5pt,
+
+    // Otsikkorivi
+    table.header([*Tarkastettava asia*], [*Kyllä*], [*Ei*]),
+
+    // Taulukon sisältö
+    [Aloituskysymykset kysyvät helppoja faktoja], [], [],
+    [Pääkysymykset ovat enemmistö kysymyksistä], [], [],
+    [Vain yksi kysymys kysytään kerrallaan], [], [],
+    [Kysymykset liittyvät tutkimusongelmaan], [], [],
+    [Kysymykset ovat pääasiassa avoimia], [], [],
+    [Kysymykset välttelevät vierasta termistöä], [], [],
+    [Useimmat kysymykset pyytävät osallistujaa kuvailemaan kokemuksia ja tunteita], [], [],
+    [Päättävät kysymykset antavat vastaajalle mahdollisuuden tuoda esille muita näkökulmia], [], [],
+    [Lopussa on kiitokset ja aie pysyä yhteydessä], [], [],
+  )),
+  caption: [IPR-mallin mukainen tarkistuslista haastatteluiden suunnitteluun ja toteutukseen, mukaillen @castillo-montoyaPreparingInterviewResearch2016.],
+) <tab:ipr-checklist>
+```
+
+!!! tip "Kokeile omassa pohjassa"
+
+    Jos kokeilet esimerkkiä suoraan puhtaassa mallipohjassa, vaihda kuvatekstin lähdeviite `@castillo-montoyaPreparingInterviewResearch2016` johonkin omassa `references.bib`-tiedostossasi olevaan lähteeseen (esim. oletuksena mukana tulevaan `@gutmanBecomingDataHead2021`).
 
 ## Muotoilun ohittaminen paikallisesti
 
@@ -57,7 +90,7 @@ Mallipohjan oletusmuotoiluja (esim. otsikkorivin lihavointi) voi tarvittaessa oh
     #figure(
       table(...),
       caption: [Esimerkki jossa otsikkorivi ei ole lihavoitu.],
-    ) <taulukko-oma-tyyli>
+    ) <tab:oma-tyyli>
   ]
 }
 ```
