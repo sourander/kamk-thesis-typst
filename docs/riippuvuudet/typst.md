@@ -6,4 +6,4 @@ Typst on uusi, moderni dokumenttien kirjoituskieli, joka perustuu LaTeX-ekosyste
 
 Typst on saatavilla Windowsille, Macille ja Linuxille. Löydät sen asennusohjeet kullekin alustalle [Open Source at Typst](https://typst.app/open-source/)-sivulta.
 
-Asennuksen jälkeen voit alkaa työskennellä. Voit käyttää komentoja, jotka esitellään [Tärkeät komennot](tarkeat.md)-sivulla. Niiden avulla voit alustaa templaattikansion, kääntää luonnoksen PDF/UA-1-muotoon ja lopullisen version PDF/A-2a-muotoon. On suositeltavaa käyttää `Justfile` tai `Makefile` tai vastaavaa komentojen ajamiseen, jotta sinun ei tarvitse muistaa kaikkia komentoja ulkoa. Justfile neuvotaan [Valinnaiset/Just](../valinnaiset/just.md)-sivulla.
+Asennuksen jälkeen voit alkaa työskennellä. Voit käyttää komentoja, jotka esitellään [Tärkeät komennot](../tarkeat.md)-sivulla. Niiden avulla voit alustaa templaattikansion, kääntää luonnoksen PDF/UA-1-muotoon ja lopullisen version PDF/A-2a-muotoon. On suositeltavaa käyttää `Justfile` tai `Makefile` tai vastaavaa komentojen ajamiseen, jotta sinun ei tarvitse muistaa kaikkia komentoja ulkoa. Justfile neuvotaan [Valinnaiset/Just](../valinnaiset/just.md)-sivulla.
