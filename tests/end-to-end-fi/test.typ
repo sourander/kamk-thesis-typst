@@ -275,6 +275,8 @@ Sisältö, joka tavallisesti tuotaisiin chapters/-hakemistosta, loppuu tähän.
 
     #lorem(50)
   ],
+  place-date: [Kajaani 15.1.2026],
+  author: [Matti Meikäläinen],
 )
 
 // Bibliography and appendices are rendered by the template.

@@ -1,6 +1,6 @@
 #import "../core/config.typ": setup-document, setup-body-page
 #import "titlepage.typ": titlepage
-#import "abstract.typ": render-abstract
+#import "abstract.typ": render-abstract, frontmatter-top-margin
 #import "foreword.typ": render-foreword
 
 // Load the translations
@@ -44,67 +44,73 @@
 
     // These settings apply to all pages from now on, until told otherwise.
     setup-body-page(language: language, {
-      // Finnish abstract (Tiivistelmä)
-      render-abstract(
-        lang-data.at("fi"),
-        authors: authors,
-        language: "fi",
-        title: title,
-        degree: degree-title + ", " + degree-programme,
-        keywords: keywords-fi,
-        abstract-fi
-      )
-
-      pagebreak(weak: true)
-
-      // English abstract (Abstract)
-      render-abstract(
-        lang-data.at("en"),
-        authors: authors,
-        language: "en",
-        title: title-en,
-        degree: degree-title-en + ", " + degree-programme-en,
-        keywords: keywords-en,
-        abstract-en
-      )
-
-      pagebreak(weak: true)
-
-      // Alkusanat / Foreword (optional)
-      if foreword != none {
-        render-foreword(language: language, foreword)
-        pagebreak(weak: true)
-      }
-
-      // 3. Sisällys / Table of Contents
+      // Frontmatter pages after the title page share the lowered top margin
+      // (matching the clearance below the KAMK logo on the abstract pages).
       {
-        // Intercept ToC entries to format the Appendices heading specifically
-        show outline.entry: it => {
-          if it.element.has("label") and it.element.label == <kamk-appendices> {
-            // Wrap in a block to bypass the global par(spacing: 3.0em)
-            block(
-              // This should follow the standard spacing within a paragraph, not between paragraphs
-              above: 1.5em, 
-              link(it.element.location())[#it.element.body]
-            )
-          } else {
-            it
-          }
+        set page(margin: (top: frontmatter-top-margin))
+
+        // Finnish abstract (Tiivistelmä)
+        render-abstract(
+          lang-data.at("fi"),
+          authors: authors,
+          language: "fi",
+          title: title,
+          degree: degree-title + ", " + degree-programme,
+          keywords: keywords-fi,
+          abstract-fi
+        )
+
+        pagebreak(weak: true)
+
+        // English abstract (Abstract)
+        render-abstract(
+          lang-data.at("en"),
+          authors: authors,
+          language: "en",
+          title: title-en,
+          degree: degree-title-en + ", " + degree-programme-en,
+          keywords: keywords-en,
+          abstract-en
+        )
+
+        pagebreak(weak: true)
+
+        // Alkusanat / Foreword (optional)
+        if foreword != none {
+          render-foreword(language: language, foreword)
+          pagebreak(weak: true)
         }
 
-        outline(
-          title: lang-data.at(language).toc,
-          indent: auto,
-        )
-      }
+        // 3. Sisällys / Table of Contents
+        {
+          // Intercept ToC entries to format the Appendices heading specifically
+          show outline.entry: it => {
+            if it.element.has("label") and it.element.label == <kamk-appendices> {
+              // Wrap in a block to bypass the global par(spacing: 3.0em)
+              block(
+                // This should follow the standard spacing within a paragraph, not between paragraphs
+                above: 1.5em, 
+                link(it.element.location())[#it.element.body]
+              )
+            } else {
+              it
+            }
+          }
 
-      pagebreak(weak: true)
+          outline(
+            title: lang-data.at(language).toc,
+            indent: auto,
+          )
+        }
 
-      // 4. Symboliluettelo / List of Symbols (optional)
-      if symbols.len() > 0 {
-        heading(level: 1, outlined: false, lang-data.at(language).symbols)
-        terms(..symbols.map(pair => terms.item(pair.at(0), pair.at(1))))
         pagebreak(weak: true)
+
+        // 4. Symboliluettelo / List of Symbols (optional)
+        if symbols.len() > 0 {
+          heading(level: 1, outlined: false, lang-data.at(language).symbols)
+          terms(..symbols.map(pair => terms.item(pair.at(0), pair.at(1))))
+          pagebreak(weak: true)
+        }
       }
 
       // After the ToC, we shall have numbering on the headings

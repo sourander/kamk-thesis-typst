@@ -11,11 +11,13 @@
 }
 
 // Template-generated AI-usage disclosure;
-// only `tools` and `usage` are author-supplied.
+// `tools`, `usage`, `place-date`, and `author` are author-supplied.
 #let render-ai-usage(
   language: "fi",
   tools: none,
   usage: none,
+  place-date: "dd.mm.yyyy",
+  author: "Xxxxxx Yyyyyyyyyyy",
 ) = {
   let d = lang-data.at(language)
 
@@ -43,4 +45,21 @@
   v(1em)
 
   d.ai_usage_declaration
+
+  v(1em)
+
+  block(width: 100%, breakable: false)[
+    #grid(
+      columns: (1fr, 1.5fr),
+      column-gutter: 2em,
+      [
+        #strong(d.ai_usage_place_date_label) \
+        #place-date
+      ],
+      [
+        #strong(d.ai_usage_author_label) \
+        #author
+      ],
+    )
+  ]
 }

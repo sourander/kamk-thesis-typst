@@ -58,6 +58,8 @@
   language: language,
   tools: [(Syötä tiedot tähän)],
   usage: [(Kuvaa tähän, mihin tarkoitukseen ja miten tekoälyä on käytetty opinnäytetyössä ja opinnäytetyöprosessin eri vaiheissa.)],
+  place-date: [dd.mm.yyyy],
+  author: [Xxxxxx Yyyyyyyyyyy],
 )
 
 #template.render-bibliography(
