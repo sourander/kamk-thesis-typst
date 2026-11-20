@@ -33,3 +33,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Body heading spacing now matches the KAMK Word template more closely.
 - Inline citations now support `@someRef[.]` to render `[1.]` (a dot inside the brackets without a comma).
+
+## [0.0.4] - 2026-11-20
+
+### Added
+
+- KAMK logo on abstract pages.
+- AI-usage signature fields
+
+### Changed
+
+- Frontmatter top margin. Affects abstract(s), foreword, ToC and list of symbols.
